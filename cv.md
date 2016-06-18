@@ -4,4 +4,4 @@ permalink: /cv/
 title: CV
 ---
 
-Available in pdf form [on this very site](/assets/resume_2016.pdf)
+Available in pdf form [on this very site](/assets/resume.pdf)
