@@ -1,6 +1,6 @@
 # Dependencies
-markdown:         kramdown
-kramdown:
+markdown:         redcarpet
+redcarpet:
   extensions: ["tables"]
 
 highlighter:         true
