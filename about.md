@@ -12,8 +12,7 @@ Bangalore](http://ece.iisc.ernet.in/).
 My current interest is on applying Deep Learning for computer vision problems such as Object Recognition, Segmentation and
 Scene understanding. I am currently working on Semantic Image Segmentation problem.
 
-My broad interests are Computer Vision, Pattern Recognition, Machine learning and Deep Learning.
-More specifically, to apply these technologies to solve real world problems.
+My broad interests are Computer Vision, Pattern Recognition, Machine learning, Deep Learning and to apply these technologies to solve real world problems.
 
 Learning is a constant process. Listed below some of the courses
 which I am doing / have done and benefitted from:
