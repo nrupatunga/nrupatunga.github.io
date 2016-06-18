@@ -35,7 +35,7 @@ Input           |  Pencil Sketch
 **Demo Video:**  [Pencil Sketch](https://nrupatunga-gmail.tinytake.com/sf/NzQwOTk5XzM0MTEzOTM)
 &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;
 **Code** [C++](https://github.com/nrupatunga/Color-Pencil-Sketch)</sup>
 <br> 
 
