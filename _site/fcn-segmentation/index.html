@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Image Semantic Segmentation Using Fully Convolutional Neural Network &middot; NRUPATUNGA
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-08 sidebar-overlay">
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" checked>-->
+<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" >-->
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>This is my personal website, where you can find out what am I currently doing in my life. <br><br>I write articles on Computer Vision, Machine Learning and Deep Learning with a good mixture of theory and hands on.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About me</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/cv/">CV</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/project/">Projects & Software</a>
+        
+      
+    
+      
+        
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2016. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+          <h3 class="masthead-title">
+            <a href="/" title="Home">NRUPATUNGA</a>
+            <small>Computer Vision & Machine Learning Enthusiast</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Image Semantic Segmentation Using Fully Convolutional Neural Network</h1>
+  <span class="post-date">01 Jun 2016</span>
+  <p>Table of Contents:</p>
+
+<ul>
+<li><a href="#L1">Introduction</a></li>
+<li><a href="#L2">Fully Connected Neural Network</a></li>
+<li><a href="#L3">Convolutional Neural Network (CNN)</a></li>
+<li><a href="#L4">Fully Convolutional Neural Network (FCN)</a>
+
+<ul>
+<li><a href="#L41">Hands on - Transforming CNN to FCN</a></li>
+</ul></li>
+<li><a href="#Lend">References</a></li>
+</ul>
+
+<p><a name="L1"></a></p>
+
+<h1>Introduction</h1>
+
+<p>In this post, I will try to give a quick theoretical background to Fully Convolutional neural Network (FCN)
+and give a little hands on understanding and training a deep FCN for Image Segmentation task.
+Minimal knowledge of neural network and convolutional network  is assumed.</p>
+
+<p><a name="L2"></a></p>
+
+<h1>Fully Connected Neural Network</h1>
+
+<table class="image">
+<caption align="bottom">Figure 1.1: Simple Neural Network</caption>
+<tr><td><img src="../assets/fcn-seg/neural_net.png" style="max-width: 100%; height: auto;" alt="Figure 1.1: Simple Neural Network"/></td></tr>
+</table>
+
+<p>Figure 1.1 shows a simple neural network with input layer, output layer and one hidden layer.</p>
+
+<ul>
+<li><p>A neural network is composed of layers, each layer consists of number of neurons. 
+Each layer is  connected to next layer through some connections which are defined using weights \(W^i\). 
+A neuron is a computational unit, which takes the input \(X\) and outputs \(Y = f(W*X)\), where \(f()\) is a non-linear function
+like <a href="https://en.wikipedia.org/wiki/Sigmoid_function"><em>sigmoid</em></a>, <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)"><em>ReLU</em></a>. Neurons are also called as <em>activation units</em>.</p></li>
+<li><p>Every neuron in a layer is connected to every other neurons in the next layer. These type of networks are called 
+<strong><em>Fully connected neural networks</em></strong>.</p></li>
+<li><p>In fully connected neural network, whatever may be the original input structure, it is converted to 1-D matrix / vector 
+before it is fed to the input layer. Outputs will also be 1-D vector. This is illustrated in Figure 1.1.</p></li>
+<li><p>We learn the weights \(W^i\), by backpropogating the errors through intermediate layers in conjunction with 
+optimization methods such as <em>Gradient Descent</em> and <em>Stochastic Gradient Descent</em> algorithm.  </p></li>
+</ul>
+
+<p><a name="L3"></a></p>
+
+<h1>Convolutional Neural Network (CNN)</h1>
+
+<table class="image">
+<caption align="bottom">Figure 1.2: Convolutional Neural Network</caption>
+<tr><td><img src="../assets/fcn-seg/cnn.PNG" style="max-width: 100%; height: auto;" alt="Figure 1.2: Convolutional Neural Network"/></td></tr>
+</table>
+
+<p>Figure 1.2 shows the convolutional neural network architecture </p>
+
+<ul>
+<li><p>Unlike regular neural networks, the layers in CNN have neurons arranged in 3 dimensions: <strong><em>width, height</em></strong> and <strong><em>depth</em></strong>.
+Here <strong><em>depth</em></strong> refers to the third dimension of the input. For example, in case of color image third dimension is the number of channels</p></li>
+<li><p>CNN has three types of layers namely <strong><em>Convolution</em></strong>, <strong><em>Pooling</em></strong> and <strong><em>Fully Connected (FC)</em></strong> layers</p></li>
+<li><p>Every layer of a CNN transforms the 3-D input volume to a 3-D output volume of neuron activations. This is done using operation called as <strong><em>Convolution</em></strong> and <strong><em>Pooling</em></strong>.</p></li>
+<li><p><strong><em>Convolution</em></strong>: It is a linear transformation which respects the ordering of the input data</p>
+
+<ul>
+<li>Convolution operation is sparse in CNN, i.e., only a few input units contribute to a
+given output unit</li>
+<li>It reuses the parameters i.e., same weights are applied to
+multiple locations</li>
+<li>Convolution operation preserves the structure of the input data (eg. Image, Sound clips) unlike fully connected neural 
+network where any form of input is always converted to 1-D vector and all the intermediate layers are 1-D vectors. </li>
+<li>Preserving the input structure helps us to visualize the intermediate layer outputs in CNN and enable us to make useful interpretations and observations in different layers of the network.</li>
+</ul></li>
+<li><p><strong><em>Pooling</em></strong>: Pooling operation provide invariance to small translations of the input. Different kinds of pooling
+functions are known namely <em>max-pooling</em> and <em>average pooling</em>. </p></li>
+</ul>
+
+<p>Both <em>Convolution</em> and <em>Pooling</em> operations are illustrated in Figure 1.2</p>
+
+<ul>
+<li>In a typical CNN, final layer will always be a <strong><em>FC</em></strong> layer as shown in Figure 1.3, 
+Neurons in a fully connected layer have full connections to all activations in the previous layer, 
+as seen in regular Neural Networks.
+<table class="image">
+<caption align="bottom">Figure 1.3: Fully connected layers in CNN</caption>
+<tr><td><img src="../assets/fcn-seg/conv-net.png" style="max-width: 100%; height: auto;" alt="Figure 1.3: Fully connected layers in CNN"/></td></tr>
+</table></li>
+</ul>
+
+<p><a name="L4"></a></p>
+
+<h1>Fully Convolutional Neural Network (FCN)</h1>
+
+<p>Fully Convolutional Neural Network is nothing but CNN, except that final
+FC layer(s) in CNN are converted to convolution layers, as simple as that. Figure 1.3 illustrates this.
+<table class="image">
+<caption align="bottom">Figure 1.3: Conversion from CNN to FCN</caption>
+<tr><td><img src="../assets/fcn-seg/CnnToFCN.png" style="max-width: 100%; height: auto;" alt="Figure 1.3: Conversion from CNN to FCN"/></td></tr>
+</table></p>
+
+<ul>
+<li>Transforming FC layers into convolution layers in CNN produces an efficient network for end-to-end dense learning as in 
+case of Image Segmentation</li>
+</ul>
+
+<p>Let us get a quick hands on how to convert a CNN to FCN using <a href="http://caffe.berkeleyvision.org/">Caffe</a> tool. 
+Caffe is a Deep learning framework by the <a href="http://bvlc.eecs.berkeley.edu/">BVLC</a></p>
+
+<p><a name="L41"></a></p>
+
+<h2>Hands on - Transforming CNN to FCN</h2>
+
+<ul>
+<li>Let&#39;s take the standard Caffe Reference ImageNet model <strong><em>CaffeNet</em></strong> and transform it into a fully convolutional 
+net for efficient, dense inference. The code is extracted from the cafee <a href="https://github.com/BVLC/caffe/blob/master/examples/net_surgery.ipynb">net surgery</a> example
+Please refer to this <a href="http://localhost:4000/netsurgery/">post</a> for step by step explanation</li>
+</ul>
+
+<h1>References</h1>
+
+<p><a name="Lend"></a>
+[1] <a href="http://cs231n.github.io/convolutional-networks/">http://cs231n.github.io/convolutional-networks/</a></p>
+
+</div>
+
+<div class="related">
+  <h2>More Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/netsurgery/">
+            Net Surgery in Caffe
+            <small>01 Jun 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/convolution-2/">
+            Convolution Arithmetic in  Deep Learning Part 2
+            <small>14 May 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/convolution-1/">
+            Convolution Arithmetic in  Deep Learning Part 1
+            <small>14 May 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Projects & Software &middot; NRUPATUNGA
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-08 sidebar-overlay">
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" checked>-->
+<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" >-->
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>This is my personal website, where you can find out what am I currently doing in my life. <br><br>I write articles on Computer Vision, Machine Learning and Deep Learning with a good mixture of theory and hands on.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About me</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/cv/">CV</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item active" href="/project/">Projects & Software</a>
+        
+      
+    
+      
+        
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2016. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+          <h3 class="masthead-title">
+            <a href="/" title="Home">NRUPATUNGA</a>
+            <small>Computer Vision & Machine Learning Enthusiast</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h2><strong>Global Image Descriptor - GIST</strong></h2>
+
+<p>GIST is the low dimensional representation of an Image. It encodes the
+structural information of the image by dividing the image into blocks,
+thus providing a rough description of the image.
+The block diagram of how GIST is computed is shown below. 
+For more theory, refer to this <a href="http://people.csail.mit.edu/torralba/code/spatialenvelope/">paper</a>. 
+<table class="image">
+<caption align="bottom"></caption>
+<tr><td><img src="./gist/gistblockdiagram.png" style="max-width: 100%; height: auto;" alt=""/></td></tr>
+</table></p>
+
+<p><sup><strong>Tool:</strong> <a href="https://github.com/nrupatunga/GIST-global-Image-Descripor">Command line tool</a></sup>
+<br> </p>
+
+<h2><strong>Pencil Sketch</strong></h2>
+
+<p>This is the implementation of the algorithm in this <a href="http://www.cse.cuhk.edu.hk/%7Eleojia/projects/pencilsketch/npar12_pencil.pdf">paper</a>. 
+It is a new system to produce pencil drawings from natural images. 
+This method mimicks the human style of Pencil Drawing by combining tonal
+and sketch structure.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Input</th>
+<th style="text-align: center">Pencil Sketch</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="./Pencil/In-1.jpg" alt=""></td>
+<td style="text-align: center"><img src="./Pencil/outputgraysketch.png" alt=""></td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Color Pencil Sketch</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="./Pencil/outputcolorsketch.png" alt=""></td>
+</tr>
+</tbody></table>
+
+<p><sup><strong>Software:</strong>  <a href="https://github.com/nrupatunga/Pencil-Sketch/releases">Windows Executable</a> 
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<strong>Demo Video:</strong>  <a href="https://nrupatunga-gmail.tinytake.com/sf/NzQwOTk5XzM0MTEzOTM">Pencil Sketch</a>
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;
+<strong>Code</strong> <a href="https://github.com/nrupatunga/Color-Pencil-Sketch">C++</a></sup>
+<br> </p>
+
+<h2><strong>Image Processing Toolbox</strong></h2>
+
+<p>This is a GUI application developed using OpenCV and Qt. This
+application can be used to experiment the following functionalities.</p>
+
+<ul>
+<li>Edge Detection
+
+<ul>
+<li>Sobel</li>
+<li>Canny</li>
+</ul></li>
+<li>Blur
+
+<ul>
+<li>Homogeneous</li>
+<li>Median</li>
+<li>Gaussian</li>
+<li>Bilateral</li>
+</ul></li>
+</ul>
+
+<p><sup><strong>Software:</strong>  <a href="https://github.com/nrupatunga/Computer-Vision-Tool">Windows Executable</a> 
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;
+<strong>Demo Video:</strong>  <a href="https://nrupatunga-gmail.tinytake.com/sf/NzUyNTg4XzM0NDE0OTM">Image Processing Toolbox</a>
+<br> </p>
+
+<h2><strong>Bilateral Filtering</strong></h2>
+
+<p>A <a href="http://people.csail.mit.edu/sparis/bf_course/">bilateral filter</a> is a non-linear, edge-preserving and noise-reducing smoothing filter for images. </p>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Input</th>
+<th style="text-align: center">Gaussian Filtering</th>
+<th style="text-align: center">Bilateral Filtering</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="./BilateralFilter/Input.jpg" alt=""></td>
+<td style="text-align: center"><img src="./BilateralFilter/GaussOutput.jpg" alt=""></td>
+<td style="text-align: center"><img src="./BilateralFilter/BilateralOutput.jpg" alt=""></td>
+</tr>
+</tbody></table>
+
+<p><sup><strong>Code:</strong> <a href="https://github.com/nrupatunga/Bilateral-Filter">C++</a><br></sup></p>
+
+<h2><strong>Canny Edge Detector</strong></h2>
+
+<p>The <a href="http://docs.opencv.org/3.1.0/da/d22/tutorial_py_canny.html#gsc.tab=0">Canny edge detector</a> is an edge detection 
+operator that uses a multi-stage algorithm to detect a wide range of edges in images</p>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Input</th>
+<th style="text-align: center">Canny Edge Output</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="./Canny/flower.jpg" alt=""></td>
+<td style="text-align: center"><img src="./Canny/cannyedge.jpg" alt=""></td>
+</tr>
+</tbody></table>
+
+<p><sup><strong>Code:</strong> <a href="https://github.com/nrupatunga/Canny-Edge-Detector">C++</a></sup>
+<br></p>
+
+<h2><strong>Python Learning</strong></h2>
+
+<p>I have been coding in Python for a while. You can find a very good
+introductory book on Python by <a href="http://python.swaroopch.com/">Swaroop</a>  which introduces different concepts of
+Python language very well. </p>
+
+<p>I have made a IPython notebook while practising the code given in this book. You
+can check it out in the below github link. I constantly refer to this
+when I am coding. </p>
+
+<p><sup><strong>Code:</strong> <a href="https://github.com/nrupatunga/Learning-Python">IPython Notebook</a></sup></p>
+
+  <br>
+  <br>
+<hr>
+</div>
+
+      </div>
+    </div>
+
+  </body>
+</html>

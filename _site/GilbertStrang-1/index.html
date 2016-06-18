@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Linear Algebra Part 1 &middot; NRUPATUNGA
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-08 sidebar-overlay">
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" checked>-->
+<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" >-->
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>This is my personal website, where you can find out what am I currently doing in my life. <br><br>I write articles on Computer Vision, Machine Learning and Deep Learning with a good mixture of theory and hands on.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About me</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/cv/">CV</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/project/">Projects & Software</a>
+        
+      
+    
+      
+        
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2016. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+          <h3 class="masthead-title">
+            <a href="/" title="Home">NRUPATUNGA</a>
+            <small>Computer Vision & Machine Learning Enthusiast</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Linear Algebra Part 1</h1>
+  <span class="post-date">03 May 2016</span>
+  <p>This is the summary of the topics covered by Gilbert Strang in his lectures</p>
+
+<p>Table of Contents:</p>
+
+<ul>
+<li>  <a href="#L1-5">Lectures 1-5</a></li>
+<li>  <a href="#L6-10">Lectures 6-10</a></li>
+<li>  <a href="#L11-15">Lectures 11-15</a></li>
+</ul>
+
+<p><a name="L1-5"></a></p>
+
+<h2>Lectures 1-5</h2>
+
+<p>Covers the basic matrix concepts</p>
+
+<ul>
+<li>  Matrix Row picture and Column picture</li>
+<li>  Can we solve for \(Ax=b\) for all \(b\) ?. No, only for \(b\)&#39;s in the column space of \(A\).</li>
+</ul>
+
+<h4>Four ways of matrix multiplication</h4>
+
+<ul>
+<li>  Dot product</li>
+<li>  Column picture</li>
+<li>  Row picture</li>
+<li>  Column times Row</li>
+</ul>
+
+<h4>Gaussian Elimination</h4>
+
+<ul>
+<li>  Operates on the rows of matrix \(A\), finally puts the matrix in <strong><em>Row Reduced Echelon</em></strong>(<strong><em>REF</em></strong>) form</li>
+<li>  Gaussian elimination leads to \(A = LU\) form, and \(A = LDU\) form</li>
+</ul>
+
+<h4>Gauss-Jordon form</h4>
+
+<ul>
+<li>  Helps to put the elements of \(A\), in the <strong><em>Row Reduced Echelon Form</em></strong> (<strong><em>RREF</em></strong>) form</li>
+<li>  Can be used to solve for \(x\) in \(Ax = b\), by finding <strong><em>RREF([\(A\) | \(b\)])</em></strong> which results in <strong><em>[\(I\) | \(x\)]</em></strong></li>
+<li>  Can be used to find the inverse of the matrix \(A\) by finding <strong><em>RREF[\(A\) | \(I\)]</em></strong> which results in <strong><em>[\(I\)|\(A^{-1}\)]</em></strong></li>
+</ul>
+
+<h4>Permutation matrix</h4>
+
+<ul>
+<li>  Number of permutation matrix \(A_{N*N} = N!\)</li>
+<li>  \(P^T = P\) (where \(P^T\) is <strong><em>transpose</em></strong>(\(P\)))</li>
+<li>  \(P P^T = I\) (<em>Can you prove? Hint: use definition of matrix multiplication</em>) *   If the number of equations are less than number of variables, why we cannot solve the equation?  *   This is because rank of the matrix will be less than the number of variables we need to solve, so it will have infinite number of solutions *   Use <strong><em>RREF(\(A\))</em></strong> in matlab/octave and check</li>
+<li>  \(A A^T\) is symmetric, prove!</li>
+</ul>
+
+<p><a name="L6-10"></a></p>
+
+<h2>Lectures 6-10</h2>
+
+<h4>Vector Space</h4>
+
+<ul>
+<li><p>All linear combination of vectors are in the space, called <strong><em>Vector Space</em></strong></p></li>
+<li><p>Say \(P\) and \(L\) are two subspaces</p>
+
+<ul>
+<li>  Is \(P\cup L\) a subspace? No, because some combination of vector \(A \in P\) and vector \(B \in L\) might not be in the subspace \(P\cup L\).</li>
+</ul></li>
+</ul>
+
+<h4>Column Space and Null Space</h4>
+
+<ul>
+<li><p><strong><em>Column Space C(\(A\))</em></strong> is all possible linear combinations of column vectors in a matrix \(A\)</p></li>
+<li><p><strong><em>Null Space N(\(A\))</em></strong> is all the \(x\)&#39;s for which \(Ax = 0\)</p></li>
+<li><p>Elimination process will change <strong><em>Column Space</em></strong> of \(A\), but not the <strong><em>Null space</em></strong> of \(A\)</p>
+
+<ul>
+<li>  This is because in the elimination process we change \(A\), but not \(x\).</li>
+</ul></li>
+</ul>
+
+<h4>Basic and Free Variables</h4>
+
+<ul>
+<li><p>The real difference between <strong><em>basic</em></strong> variables and <strong><em>free</em></strong> variables is that the <strong><em>free</em></strong> variables can be anything, and the <strong><em>basic</em></strong> variables are determined by solving the equations</p></li>
+<li><p><strong><em>Basic</em></strong> variables are also called as <strong><em>Pivot</em></strong> variables. The columns with these variables are called <strong><em>Pivot</em></strong> columns</p></li>
+<li><p>Number of <strong><em>Pivot</em></strong> columns = <strong><em>Rank</em></strong> <strong>r</strong> of the matrix = Number of independent columns in the matrix</p></li>
+<li><p>Number of <strong><em>Free</em></strong> columns = <strong>n</strong> - <strong>r</strong> ( <strong>n</strong> = number of columns in matrix \(A))</p></li>
+</ul>
+
+<h4>Solution for Ax = b</h4>
+
+<p>Rank tells you everything about the number of solutions</p>
+
+<ul>
+<li>  <em>Full column rank matrix</em>: Unique solution exists, if \(b\) lies in column space of \(A\)</li>
+<li>  <em>Full row rank matrix</em>: Infinite number of solutions</li>
+<li>  <em>Full row rank/ full column rank</em>: Unique solution always exists for all \(b\)</li>
+<li>  No full column rank/ No full row rank: Infinitely many solution exists if \(b\) lies in column space of \(A\)</li>
+</ul>
+
+<h4>Basis</h4>
+
+<ul>
+<li>  Basis of a vector space is sequence of vectors \(v_1, v_2, v_3, ..., v_N\) with the following properties
+
+<ul>
+<li>  They are independent</li>
+<li>  They span a space</li>
+</ul></li>
+</ul>
+
+<h4>Four Subspaces</h4>
+
+<p>For a matrix \(A_{m*n}\)</p>
+
+<ul>
+<li>  <em>Column space</em> <strong><em>C(\(A\))</em></strong>: combination of columns of \(A\), lies in \(R^n\)</li>
+<li>  Null space <strong><em>N(\(A^T\))</em></strong> : left null space of \(A\), lies in \(R^n\)</li>
+<li>  <em>Row space</em> <strong><em>R(\(A\))</em></strong>: combination of columns of \(A^T\), lies in \(R^m\)</li>
+<li>  <em>Null space</em> <strong><em>N(\(A\))</em></strong>: right null space of \(A\), lies in \(R^m\)</li>
+<li>  Row operation on a matrix \(A\) changes the column space of \(A\), but preserves the row space of \(A\)</li>
+</ul>
+
+<p><a name="L11-15"></a></p>
+
+<h2>Lectures 11-15</h2>
+
+<h4>Vector Space of Matrices</h4>
+
+<ul>
+<li>Consider vector space of matrices \(A_{N*N}\)
+
+<ul>
+<li>Dimension of vector space of symmetric matrices = \((N^2 + N)/2\)</li>
+<li>Dimension of vector space of skew symmetric matrices = \((N^2 - N)/2\)</li>
+<li>Dimension of vector space of upper triangular  matrices = \((N^2 + N)/2\)</li>
+<li>(Symmetric matrix \(\cap\) Upper triangular matrices) = Diagonal
+matrices. Dimension of vector space = \((N^2 - N)/2\)</li>
+<li>(Symmetric matrix \(\cup\) Upper triangular matrices) = All \(N*N\) matrices. Dimension of vector space = \(N^2\)</li>
+</ul></li>
+</ul>
+
+<h4>Rank-1 Matrices</h4>
+
+<ul>
+<li>They are special case</li>
+<li>They are building blocks for every other matrices</li>
+<li>Matrices with Rank-1 are separable matrices ( this is the
+application in image processing for separating the filters)</li>
+</ul>
+
+<h4>Orthogonality</h4>
+
+<ul>
+<li>Prove that two vectors \(X\) and \(Y\) are orthogonal to each other if
+\(X^T Y = 0 = Y^T X\)</li>
+<li><em>Row space</em> is perpendicular to <em>Right null space</em> , i.e., every vector
+in row space is perpendicular to every other vector in right
+null space</li>
+<li><em>Column space</em> is perpendicular to <em>left null space</em>, i.e., every
+vector in column space  is perpendicular to every other vector
+in left null space</li>
+</ul>
+
+<h4>Projection Matrix</h4>
+
+<ul>
+<li><p>Projection of vector \(b\) onto vector \(a\) is defined as \(p = Pb\), where \(P = (a a^T)/(a^T a) \)
+<div class="fig figcenter fighighlight">
+<img src="../assets/projection.jpg" width="20%">
+</div></p></li>
+<li><p>Column space of projection matrix \(P\) is column space of \(a\). i.e., line through \(a\)</p></li>
+<li><p>Properties of Projection matrices</p>
+
+<ul>
+<li>\(P^T = P\) </li>
+<li>\(P^2 = P\)</li>
+</ul></li>
+<li><p>Projection matrix in general</p>
+
+<ul>
+<li>We have \(A^T A \hat{x} = A^T B\)</li>
+<li>\(P = A \hat{x}\), where \(\hat{x} = (A^T A)^{-1} A^T B\)
+and \(P = A (A^T A)^{-1} A^T \)</li>
+</ul></li>
+</ul>
+
+<h4>Least square problem</h4>
+
+<ul>
+<li>Why projection ? 
+
+<ul>
+<li>When we have only few unknowns, but many equations to solve
+\(Ax = b\), \(b\) might not be the column space of
+\(A\)</li>
+<li>To solve for \(x\), we project \(b\) onto columns
+space of \(A\), so that the new vector \(\bar{b}\) is closest
+to \(b\)</li>
+<li><strong><em>Eg</em></strong>. Measuring pulse of the heart, but repeatedly we take
+measurements so that on an average we can estimate the pulse. 
+For more detailed treatment of least squares,
+<a href="http://home.engineering.iastate.edu/%7Ejulied/classes/CE570/Notes/strangpaper.pdf">link</a></li>
+</ul></li>
+<li><p>The pictorial representation of solving least squares is shown below</p>
+
+<ul>
+<li>Least squares: \(\bar{x}\) minimizes \(b - Ax\) by solving \(A^T A \bar{x} = A^T b\)
+<div class="fig figcenter fighighlight">
+<img src="../assets/ls.jpg" width="100%">
+</div></li>
+</ul></li>
+<li><p>\(A^T A\) is invertible, if \(A\) has independent columns, prove
+it</p></li>
+</ul>
+
+</div>
+
+<div class="related">
+  <h2>More Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/netsurgery/">
+            Net Surgery in Caffe
+            <small>01 Jun 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/fcn-segmentation/">
+            Image Semantic Segmentation Using Fully Convolutional Neural Network
+            <small>01 Jun 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/convolution-2/">
+            Convolution Arithmetic in  Deep Learning Part 2
+            <small>14 May 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+      </div>
+    </div>
+
+  </body>
+</html>

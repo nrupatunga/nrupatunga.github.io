@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Convolution Arithmetic in  Deep Learning Part 2 &middot; NRUPATUNGA
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-08 sidebar-overlay">
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" checked>-->
+<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" >-->
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>This is my personal website, where you can find out what am I currently doing in my life. <br><br>I write articles on Computer Vision, Machine Learning and Deep Learning with a good mixture of theory and hands on.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About me</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/cv/">CV</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/project/">Projects & Software</a>
+        
+      
+    
+      
+        
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2016. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+          <h3 class="masthead-title">
+            <a href="/" title="Home">NRUPATUNGA</a>
+            <small>Computer Vision & Machine Learning Enthusiast</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Convolution Arithmetic in  Deep Learning Part 2</h1>
+  <span class="post-date">14 May 2016</span>
+  <p>Table of Contents:</p>
+
+<ul>
+<li>  <a href="#L1">Recap from Part 1</a></li>
+<li>  <a href="#L2">Pooling</a></li>
+<li>  <a href="#L3">Deconvolution</a></li>
+<li>  <a href="#L4">Deconvolution Arithmetic</a>
+
+<ul>
+<li><a href="#L41">No Zero Padding, Unit Strides, Transposed</a></li>
+<li><a href="#L42">Zero Padding, Unit Strides, Transposed</a></li>
+<li><a href="#L43">Half Padding, Transposed</a></li>
+<li><a href="#L44">Full Padding, Transposed</a></li>
+<li><a href="#L45">No Zero Padding, Non-Unit Strides, Transposed</a></li>
+<li><a href="#L46">Zero Padding, Non-Unit Strides, Transposed</a> </li>
+</ul></li>
+<li>  <a href="#L5">Take Away </a></li>
+<li>  <a href="#LR">References</a></li>
+</ul>
+
+<p><a name="L1"></a></p>
+
+<h2>Recap from Part 1</h2>
+
+<p>In Part 1, we reviewed the convolution operation and understood how output of convolution is affected by the 
+choice of parameters such as <em>kernel size, strides</em>, and <em>padding</em>.  We saw the effect of <em>strides</em> and 
+<em>padding</em> on output of the convolution individually and together. </p>
+
+<p>At last we came up with a general formula for output of the convolution and its dependency on these parameters.
+Please remember the below relationship</p>
+
+<p><strong>Relationship</strong>: For any \(i\), \(k\), \(s\), and \(p\) 
+$$o = \lfloor \dfrac{i + 2p - k}{s} \rfloor + 1$$
+where \( i \) : input size, \( k \) : kernel size, \( s \) : stride, \( p \) : zero padding, \(\lfloor \rfloor\): floor operation, \(o\) : output size</p>
+
+<table class="image">
+<caption align="bottom">Figure 2.1 Arbitrary padding and Strides</caption>
+<tr><td><img src="../assets/arbitrary_padding_strides-1.PNG" style="max-width: 100%; height: auto;" alt="Figure 2.1 Arbitrary padding and Strides"/></td></tr>
+</table>
+
+<ul>
+<li>Figure 2.1  provides an example for \(i = 5\), \(k = 3\), \(s = 2\) and \(p = 1\),
+therefore output size \(o = \lfloor \dfrac{5 + 2*1 - 3}{2} \rfloor + 1 = 5\).</li>
+</ul>
+
+<p>Now that we know how these parameters play a role in convolution, let us understand the same in pooling and deconvolution arithmetic</p>
+
+<p><a name="L2"></a></p>
+
+<h2>Pooling</h2>
+
+<p>Pooling operation provide invariance to small translations of the input (think in terms of image). Different kinds of pooling
+functions are known namely <em>max-pooling</em> and <em>average pooling</em>. Pooling does not involves zero padding in neural network. 
+So, we can rewrite the formula described in the above section by eliminating the padding term \(p\) as
+G
+$$o = \lfloor \dfrac{i - k}{s} \rfloor + 1$$</p>
+
+<p>This relationship holds good for any kind of pooling</p>
+
+<p><a name="L3"></a></p>
+
+<h2>Deconvolution</h2>
+
+<p>Deconvolution is nothing but transpose of convolution. It is also called as <strong><em>Transposed Convolution</em></strong>.
+<table class="image">
+<caption align="bottom">Figure 2.2: Computing the output values of a discrete convolution</caption>
+<tr><td><img src="../assets/no_padding_no_strides.png" style="max-width: 100%; height: auto;" alt="Figure 2.2: Computing the output values of a discrete convolution"/></td></tr>
+</table></p>
+
+<p>Lets take an example of convolution represented in Figure 2.2 to understand what I meant. If we unroll the input and output into vectors from left to right and top to bottom,
+we can represent the output by the multiplication of input with sparse matrix \(C\), where the non-zero elements are the elements \(w_{i, j}\) 
+of the kernel (\(i\) : row and \(j\) : column). This is showin in Figure 2.3
+<table class="image">
+<caption align="bottom">Figure 2.3: Unrolling the Convolution operation to sparse matrix multiplication</caption>
+<tr><td><img src="../assets/convolution/deconvolution-unroll.jpg" style="max-width: 100%; height: auto;" alt="Figure 2.3: Unrolling the Convolution operation to sparse matrix multiplication"/></td></tr>
+</table></p>
+
+<ul>
+<li>As shown in the figure, matrix multiplication form takes the input matrix flattened as a \(16\)-dimensional vector and produces a \(4\)-dimensional 
+vector. Therefore convolution maps the input vector from \(16\)-dimensional space to \(4\)-dimensional space.</li>
+<li>In order to map back the \(4\)-dimensional space to \(16\)-dimensional space, we multiply the output with \(C^T\). Hence the name <strong><em>Transposed Convolution</em></strong> for 
+<strong><em>Deconvolution</em></strong>. This is shown in Figure 2.4.
+<table class="image">
+<caption align="bottom">Figure 2.4: Transposed Convolution</caption>
+<tr><td><img src="../assets/convolution/deconvolution.jpg" style="max-width: 100%; height: auto;" alt="Figure 2.4: Transposed Convolution"/></td></tr>
+</table></li>
+</ul>
+
+<p><a name="L4"></a></p>
+
+<h2>Deconvolution Arithmetic</h2>
+
+<p>In order to analyse deconvolution layer properties, we use the same simplified settings we used for convolution layer.</p>
+
+<p><a name="L41"></a></p>
+
+<h3>No Zero Padding, Unit Strides, Transposed</h3>
+
+<ul>
+<li>The example in Figure 2.2 shows convolution of \(3\) x \(3\) kernel on a \(4\) x \(4\) input with 
+unitary stride and no padding (i.e., \(i = 4, k = 3, s = 1, p = 0\)). This produces output of size \(2\) x \(2\).<br></li>
+<li>The transpose of this convolution is to obtain output of shape \(4\) x \(4\) when applied on a \(2\) x \(2\) input.
+This can be achieved by directly convolving \(3\) x \(3\) kernel over \(2\) x \(2\) input padded with a \(2\) x \(2\) border of zeros
+(i.e., \(i&#39;= 2, k&#39; = k, s&#39; = s, p&#39; = 2\)). This is shown in Figure 2.5
+<table class="image">
+<caption align="bottom">Figure 2.5: No Zero Padding, Unit Strides</caption>
+<tr><td><img src="../assets/convolution/deconv2.5.JPG" style="max-width: 100%; height: auto;" alt="Figure 2.5: No Zero Padding, Unit Strides"/></td></tr>
+</table></li>
+</ul>
+
+<p><strong>Relationship-7</strong>: A convolution described by \(s = 1, p = 0\), and \(k\) has an associated deconvolution described by \(k&#39; = k, s&#39; = s\)  and \(p&#39; = k - 1\)
+and its output size is 
+$$o&#39; = i&#39;+ k - 1$$</p>
+
+<p><strong><em>Proof</em></strong>: We know that, general form of convolution is defined as
+$$o = \lfloor \dfrac{i + 2p - k}{s} \rfloor + 1$$
+subsituting for \(s = 1, p = 0\), convolution is defined as
+$$o = i - k + 1$$
+But, we need \(o = i&#39;, i = o&#39;\), therefore
+$$i&#39; = o&#39; - k + 1$$
+$$\implies o&#39; = i&#39; + k - 1$$</p>
+
+<p><a name="L42"></a></p>
+
+<h3>Zero Padding, Unit Strides, Transposed</h3>
+
+<p>The transpose of zero padded convolution is equivalent to convolving an input padded with less zeros</p>
+
+<p><strong>Relationship-8</strong>: A convolution described by \(s = 1, k\), and \(p\) has an associated deconvolution described by \(k&#39; = k, s&#39; = s\)  and \(p&#39; = k - p - 1\)
+and its output size is 
+$$o&#39; = i&#39;+ (k - 1) - 2p$$</p>
+
+<p>This is illustrated in Figure 2.6, for \(i = 5, k = 4\) and \(p = 2\)
+<table class="image">
+<caption align="bottom">Figure 2.6: Zero Padding, Unit Strides</caption>
+<tr><td><img src="../assets/convolution/deconv2.6.JPG" style="max-width: 100%; height: auto;" alt="Figure 2.6: Zero Padding, Unit Strides"/></td></tr>
+</table></p>
+
+<p><a name="L43"></a></p>
+
+<h3>Half Padding, Transposed</h3>
+
+<p>Applying the same reasoning as before, transpose of half padded convolution is itself a half padded convolution. </p>
+
+<p><strong>Relationship-9</strong>: A convolution described by \(k = 2n + 1\), \(n \in N\) and \(s = 1\) and \(p = \lfloor \dfrac{k}{2} \rfloor = n\)
+has an associated transposed convolution described by \(k&#39; = k, s&#39; = s, p&#39; = p\) and its output size is
+$$o&#39; = i&#39;+ (k - 1) - 2p$$
+$$o&#39; = i&#39;+ 2n - 2n $$
+$$o&#39; = i&#39;$$</p>
+
+<p>This is illustrated in Figure 2.7, for \(i = 5, k = 3\) and therefore \(p = 1\)
+<table class="image">
+<caption align="bottom">Figure 2.7: Half Padding</caption>
+<tr><td><img src="../assets/convolution/deconv2.7.JPG" style="max-width: 100%; height: auto;" alt="Figure 2.7: Half Padding"/></td></tr>
+</table></p>
+
+<p><a name="L44"></a></p>
+
+<h3>Full Padding, Transposed</h3>
+
+<p>The equivalent of fully padded convolution is a non-padded convolution</p>
+
+<p><strong>Relationship-10</strong>: A convolution described by \(s = 1, k\) and \(p = k - 1\)
+has an associated transposed convolution described by \(k&#39; = k, s&#39; = s, p&#39; = 0\) and its output size is
+$$o&#39; = i&#39;+ (k - 1) - 2p$$
+$$o&#39; = i&#39;- (k - 1) $$</p>
+
+<p>This is illustrated in Figure 2.8, for \(i = 5, k = 3\) and therefore \(p = 2\)
+<table class="image">
+<caption align="bottom">Figure 2.8: Full Padding</caption>
+<tr><td><img src="../assets/convolution/deconv2.8.JPG" style="max-width: 100%; height: auto;" alt="Figure 2.8: Full Padding"/></td></tr>
+</table></p>
+
+<p><a name="L45"></a></p>
+
+<h3>No Zero Padding, Non-Unit Strides, Transposed</h3>
+
+<p>Using the same kind of reasoning as before, we might expect that the transpose of a convolution with \(s &gt; 1\) involves 
+equivalent convolution with \(s &lt; 1\). This is a valid intution and which is why transposed convolutions are also called as <em>fractionally
+strided convolutions</em></p>
+
+<p><strong>Relationship-11</strong>: A convolution described by \(p = 0, k\) and \(s\) and whose input
+size is such that \(i - k\) is a multiple of \(s\), has an associated transposed
+convolution described by \(\tilde{i}&#39;\), \(k&#39; = k\), \(s&#39; = 1\) and \(p&#39; = k - 1\),
+where \(\tilde{i}&#39;\) is the size of the stretched input obtained by adding
+\(s - 1\) zeros between each input unit, and its output size</p>
+
+<p>$$o&#39; = s (i&#39; - 1) + k$$</p>
+
+<p>This is illustrated in Figure 2.9, for \(i = 5, k = 3\) and \(s = 2\)
+<table class="image">
+<caption align="bottom">Figure 2.9: No Zero Padding, Non-Unit Strides</caption>
+<tr><td><img src="../assets/convolution/deconv2.9.JPG" style="max-width: 100%; height: auto;" alt="Figure 2.9: No Zero Padding, Non-Unit Strides"/></td></tr>
+</table></p>
+
+<p><a name="L46"></a></p>
+
+<h3>Zero Padding, Non-Unit Strides, Transposed</h3>
+
+<p><strong>Relationship-12</strong>: A convolution described by \(k\), \(s\) and \(p\) and whose
+input size \(i\) is such that \(i + 2p - k\) is a multiple of \(s\) has an associated
+transposed convolution described by \(\tilde{i}&#39;\), \(k&#39; = k\), \(s&#39; = 1\) and
+\(p&#39; = k - p - 1\), where \(\tilde{i}&#39;\) is the size of the stretched input
+obtained by adding \(s - 1\) zeros between each input unit, and its output size
+is</p>
+
+<p>$$o&#39; = s (i&#39; - 1) + k - 2p$$
+This is illustrated in Figure 2.10, for \(i = 5, k = 3, s = 2\) and \(p = 1\)
+<table class="image">
+<caption align="bottom">Figure 2.10: Zero Padding, Non-Unit Strides</caption>
+<tr><td><img src="../assets/convolution/deconv2.10.JPG" style="max-width: 100%; height: auto;" alt="Figure 2.10: Zero Padding, Non-Unit Strides"/></td></tr>
+</table></p>
+
+<p>The constraint on the size of the input can be removed by introducing a new parameter \(a \in {0, \ldots, s - 1}\)</p>
+
+<p><strong>Relationship-13</strong>: A convolution described by \(k\), \(s\) and \(p\) has an
+associated transposed convolution described by \(a\), \(\tilde{i}&#39;\), \(k&#39; = k\), \(s&#39; = 1\) 
+and \(p&#39; = k - p - 1\), where \(\tilde{i}&#39;\) is the size of the stretched
+input obtained by adding \(s - 1\) zeros between each input unit, and \(a = (i + 2p - k) \mod s\)
+represents the number of zeros added to the top and right edges
+of the input, and its output size is</p>
+
+<p>$$o&#39; = s (i&#39; - 1) + a + k - 2p$$
+This is illustrated in Figure 2.11, for \(i = 6, k = 3, s = 2\) and \(p = 1\)
+<table class="image">
+<caption align="bottom">Figure 2.11: Zero Padding, Non-Unit Strides</caption>
+<tr><td><img src="../assets/convolution/deconv2.11.JPG" style="max-width: 100%; height: auto;" alt="Figure 2.11: Zero Padding, Non-Unit Strides"/></td></tr>
+</table></p>
+
+<p><a name="L46"></a></p>
+
+<p><a name="L5"></a></p>
+
+<h2>Take Away</h2>
+
+<h3>Formula for Convolution:</h3>
+
+<p>$$o = \lfloor \dfrac{i + 2p - k}{s} \rfloor + 1$$</p>
+
+<h3>Formula for Deconvolution:</h3>
+
+<p>$$o&#39; = s (i&#39; - 1) + a + k - 2p$$</p>
+
+<p>where \( i \) : input size before convolution, \( k \) : kernel size, \( s \) : stride, \( p \) : zero padding, 
+\(\lfloor \rfloor\): floor operation, \(o\) : output size after convolution,  \( i&#39; \) : input size before deconvolution
+\(o&#39;\) : output size after deconvolution, \(a \in {0, \ldots, s - 1}\)</p>
+
+<p><a name="LR"></a></p>
+
+<h2>References</h2>
+
+<p>[1] <a href="https://arxiv.org/abs/1603.07285">A guide to convolution arithmetic for deep learning</a></p>
+
+</div>
+
+<div class="related">
+  <h2>More Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/netsurgery/">
+            Net Surgery in Caffe
+            <small>01 Jun 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/fcn-segmentation/">
+            Image Semantic Segmentation Using Fully Convolutional Neural Network
+            <small>01 Jun 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/convolution-1/">
+            Convolution Arithmetic in  Deep Learning Part 1
+            <small>14 May 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+      </div>
+    </div>
+
+  </body>
+</html>

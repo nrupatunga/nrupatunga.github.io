@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Net Surgery in Caffe &middot; NRUPATUNGA
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-08 sidebar-overlay">
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" checked>-->
+<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" >-->
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>This is my personal website, where you can find out what am I currently doing in my life. <br><br>I write articles on Computer Vision, Machine Learning and Deep Learning with a good mixture of theory and hands on.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About me</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/cv/">CV</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/project/">Projects & Software</a>
+        
+      
+    
+      
+        
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2016. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+          <h3 class="masthead-title">
+            <a href="/" title="Home">NRUPATUNGA</a>
+            <small>Computer Vision & Machine Learning Enthusiast</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Net Surgery in Caffe</h1>
+  <span class="post-date">01 Jun 2016</span>
+  <p><sub>
+<strong>Note</strong>: Please download the IPython notebook from this link, check out README file for instructions before you go through the rest of the post.
+</sub></p>
+
+<p>Table of Contents:</p>
+
+<ul>
+<li><a href="#L1">Introduction</a></li>
+<li><a href="#L2">Network architecture</a></li>
+<li><a href="#L3">Weight transplant</a></li>
+</ul>
+
+<p><a name="L1"></a></p>
+
+<h1>Introduction</h1>
+
+<p>This is a hands on converting a Convolutional Neural Network (CNN) to Fully Convolution Network (FCN). Converting CNN to FCN is nothing but 
+converting fully connected (FC) layers in CNN to convolution layers </p>
+
+<p>Let&#39;s take the standard Caffe Reference ImageNet model <a href="https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet">CaffeNet</a> and
+transform it into a fully convolutional net. The code is extracted and modified from the cafee <a href="https://github.com/BVLC/caffe/blob/master/examples/net_surgery.ipynb">net surgery</a> example</p>
+
+<p><a name="L2"></a></p>
+
+<h1>Network architecture</h1>
+
+<p>Before converting FC layers to convolution layers, lets see the network architecture first. 
+Figure 1 shows the architecture of CaffeNet.</p>
+
+<p><sub> (Open the image in new tab and zoom to see the details) </sub>
+<table class="image">
+<caption align="bottom">Figure 1: CaffeNet architecture</caption>
+<tr><td><img src="../assets/net-surgery/bvlc.png" style="max-width: 100%; height: auto;" alt="Figure 1: CaffeNet architecture"/></td></tr>
+</table></p>
+
+<h4>Python Code</h4>
+
+<table class="image">
+<caption align="bottom"></caption>
+<tr><td><img src="../assets/net-surgery/architecture-caffenet.png" style="max-width: 100%; height: auto;" alt=""/></td></tr>
+</table>
+
+<h4>Output</h4>
+
+<table class="image">
+<caption align="bottom"></caption>
+<tr><td><img src="../assets/net-surgery/outputarch.png" style="max-width: 100%; height: auto;" alt=""/></td></tr>
+</table>
+
+<ul>
+<li><p>Execute the python code, output prints the layers in <strong><em>CaffeNet</em></strong> and dimensions of weights in each
+layer. Here for the sake of simplicity I have eliminated bias parameters. As you can see, it has 5 convolution 
+layers (<em>conv1, conv2, conv3, conv4, conv5</em>) and three FC (<em>fc6, fc7, fc8</em>) layers</p></li>
+<li><p>Lets understand the weight dimensions format in convolution and FC layers. Figure 2 is self explanatory.
+<table class="image">
+<caption align="bottom">Figure 2: Weight dimensions in Convolution and FC layers</caption>
+<tr><td><img src="../assets/net-surgery/filter.png" style="max-width: 100%; height: auto;" alt="Figure 2: Weight dimensions in Convolution and FC layers"/></td></tr>
+</table></p></li>
+<li><p>Now that we know the network architecture and the weight dimensions in each layer, our intension is to convert FC (<em>fc6, fc7, fc8</em>) layers to convolution layers</p></li>
+<li><p>As explained in Figure 2, in dimensions of <em>fc6</em> layer \((4096, 9216)\), \(9216\) indicates the number of outputs from convolution layer-5 after pooling. 
+Lets just confirm that.
+<table class="image">
+<caption align="bottom">Figure 3: Output dimensions from convolution layer-5 after pooling</caption>
+<tr><td><img src="../assets/net-surgery/pool5.png" style="max-width: 100%; height: auto;" alt="Figure 3: Output dimensions from convolution layer-5 after pooling"/></td></tr>
+</table></p></li>
+<li><p>Observe \(256 * 6 * 6\) = \(9216\), so in order to convert <em>fc6</em> layer to convolution layer, we just need to use the convolution kernel of size 6. 
+The respective prototxt file change is shown in Figure 4.
+<table class="image">
+<caption align="bottom">Figure 4: fc6 to convolution layer</caption>
+<tr><td><img src="../assets/net-surgery/fc6-conv6.png" style="max-width: 100%; height: auto;" alt="Figure 4: fc6 to convolution layer"/></td></tr>
+</table></p></li>
+<li><p>The rest of fully connected layers <em>fc7</em>, <em>fc8</em> can be viewed as convolution layer with \(1\) x \(1\) kernel.
+The respective prototxt file change is shown in Figure 5.
+<table class="image">
+<caption align="bottom">Figure 5: fc7, fc8 to convolution layer</caption>
+<tr><td><img src="../assets/net-surgery/fc78.png" style="max-width: 100%; height: auto;" alt="Figure 5: fc7, fc8 to convolution layer"/></td></tr>
+</table></p></li>
+<li><p>Lets verify it now.</p></li>
+</ul>
+
+<h4>Python Code</h4>
+
+<table class="image">
+<caption align="bottom"></caption>
+<tr><td><img src="../assets/net-surgery/fc78-python.png" style="max-width: 100%; height: auto;" alt=""/></td></tr>
+</table>
+
+<h4>Output</h4>
+
+<table class="image">
+<caption align="bottom"></caption>
+<tr><td><img src="../assets/net-surgery/fc78-output.png" style="max-width: 100%; height: auto;" alt=""/></td></tr>
+</table>
+
+<p><a name="L3"></a></p>
+
+<h1>Weight transplant</h1>
+
+<p>Now that we converted the network architecture, lets transfer the
+weights from CNN to FCN and generate the classification map.</p>
+
+<h4>Python Code</h4>
+
+<table class="image">
+<caption align="bottom"></caption>
+<tr><td><img src="../assets/net-surgery/class-python.png" style="max-width: 100%; height: auto;" alt=""/></td></tr>
+</table>
+
+<h4>Output</h4>
+
+<table class="image">
+<caption align="bottom"></caption>
+<tr><td><img src="../assets/net-surgery/class-output.png" style="max-width: 100%; height: auto;" alt=""/></td></tr>
+</table>
+
+<p>As you can see in the probability map values, the classifications include various cats -- 282 = tiger cat, 281 = tabby, 283 = persian.</p>
+
+<p>So FCN can be used to extract dense feature maps. This enables us dense
+learning (eg. Image Semantic Segmenation).</p>
+
+<p>That is it, we have converted CNN to FCN. It is easy isn&#39;t it?.</p>
+
+</div>
+
+<div class="related">
+  <h2>More Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/fcn-segmentation/">
+            Image Semantic Segmentation Using Fully Convolutional Neural Network
+            <small>01 Jun 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/convolution-2/">
+            Convolution Arithmetic in  Deep Learning Part 2
+            <small>14 May 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/convolution-1/">
+            Convolution Arithmetic in  Deep Learning Part 1
+            <small>14 May 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+      </div>
+    </div>
+
+  </body>
+</html>
