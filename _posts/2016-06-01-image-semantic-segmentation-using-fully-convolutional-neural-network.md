@@ -85,7 +85,7 @@ Caffe is a Deep learning framework by the [BVLC](http://bvlc.eecs.berkeley.edu/)
 ## Hands on - Transforming CNN to FCN 
 * Let's take the standard Caffe Reference ImageNet model **_CaffeNet_** and transform it into a fully convolutional 
 net for efficient, dense inference. The code is extracted from the cafee [net surgery](https://github.com/BVLC/caffe/blob/master/examples/net_surgery.ipynb) example
-Please refer to this [post](http://localhost:4000/netsurgery/) for step by step explanation
+Please refer to this [post](https://nrupatunga.github.io/netsurgery/) for step by step explanation
 
 
 # References
