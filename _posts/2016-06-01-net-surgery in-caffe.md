@@ -4,7 +4,7 @@ permalink: /netsurgery/
 ---
 
 <sub>
-**Note**: Please download the [IPython notebook](../assets/net_surgery_fcn.ipynb) from this link.
+**Note**: Please download the [IPython notebook](../assets/net_surgery_fcn.ipynb) from this link. Run the code as you read the post
 </sub>
 
 Table of Contents:
