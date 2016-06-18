@@ -4,7 +4,7 @@ permalink: /netsurgery/
 ---
 
 <sub>
-**Note**: Please download the IPython notebook from this link, check out README file for instructions before you go through the rest of the post.
+**Note**: Please download the [IPython notebook](../assets/net_surgery_fcn.ipynb) from this link, check out README file for instructions before you go through the rest of the post.
 </sub>
 
 Table of Contents:
