@@ -12,17 +12,9 @@ The block diagram of how GIST is computed is shown below.
 For more theory, refer to this [paper](http://people.csail.mit.edu/torralba/code/spatialenvelope/). 
 {% include image.html url="./gist/gistblockdiagram.png" description="" %}
 <sup>**Tool:** [Command line tool](https://github.com/nrupatunga/GIST-global-Image-Descripor)</sup>
-&nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; 
-&nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; 
-&nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; 
-&nbsp; &nbsp; &nbsp; 
-&nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; 
 <sup>**Code:** [C++](https://github.com/nrupatunga/GIST-global-Image-Descripor)</sup>
 <br> 
 
