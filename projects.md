@@ -18,6 +18,8 @@ For more theory, refer to this [paper](http://people.csail.mit.edu/torralba/code
 &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
 <sup>**Code:** [C++](https://github.com/nrupatunga/GIST-global-Image-Descripor)</sup>
 <br> 
 
