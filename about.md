@@ -9,8 +9,7 @@ Bangalore](http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.h
 I completed my Master's degree in Signal Processing, from [Indian Institute of Science,
 Bangalore](http://ece.iisc.ernet.in/).  
 
-My current interest is on applying Deep Learning for computer vision problems such as Object Recognition, Segmentation and
-Scene understanding. I am currently working on Semantic Image Segmentation problem.
+My current interest is on applying Deep Learning for computer vision problems such as Scene Understanding, Object Detection,  Recognition and Segmentation. I am currently working on Semantic Image Segmentation problem.
 
 My broad interests are Computer Vision, Pattern Recognition, Machine learning, Deep Learning and to apply these technologies to solve real world problems.
 
