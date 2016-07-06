@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /project/
-title: Projects & Software
+title: Projects Code & Software
 ---
 
 ##**Global Image Descriptor - GIST**
@@ -10,12 +10,22 @@ structural information of the image by dividing the image into blocks,
 thus providing a rough description of the image.
 The block diagram of how GIST is computed is shown below. 
 For more theory, refer to this [paper](http://people.csail.mit.edu/torralba/code/spatialenvelope/). 
-{% include image.html url="./gist/gistblockdiagram.png" description="" %}
+{% include image.html url="./gist/gistblockdiagram.png" description="GIST block diagram" %}
+
+In order to visualize how GIST feature could encode the information of an
+image, I projected the 512-dimensional GIST feature vector to a
+2-dimensional space using dimensionality reduction technique called
+[t-SNE](https://lvdmaaten.github.io/tsne/) and generated t-SNE
+visualization using the [code](http://cs.stanford.edu/people/karpathy/cnnembed/) provided by Andrej Karpathy.
+
+Please zoom into the [image](./gist/t-sne/gist-nn-large.png) and see how similar images are clustered together.
+{% include image.html url="./gist/t-sne/gist-nn-small.png" description="t-SNE visualization ([click here for bigger image](./gist/t-sne/gist-nn-large.png))" %}
+
 <sup>**Tool:** [Command line tool](https://github.com/nrupatunga/GIST-global-Image-Descripor)</sup>
-&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-<sup>**Code:** [C++](https://github.com/nrupatunga/GIST-global-Image-Descripor)</sup>
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; 
+<sup>**GIST Code:** [C++](https://github.com/nrupatunga/GIST-global-Image-Descripor)</sup>
 <br> 
 
 ##**Pencil Sketch**
@@ -40,8 +50,10 @@ Input           |  Pencil Sketch
 &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp;
-**Code** [C++](https://github.com/nrupatunga/Color-Pencil-Sketch)</sup>
+**Code:** [C++](https://github.com/nrupatunga/Color-Pencil-Sketch)</sup>
 <br> 
+
+<sup>_**Note:**_ _Software does not include color pencil sketch for now!_
 
 ##**Image Processing Toolbox**
 This is a GUI application developed using OpenCV and Qt. This
