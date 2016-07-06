@@ -18,8 +18,9 @@ image, I projected the 512-dimensional GIST feature vector to a
 [t-SNE](https://lvdmaaten.github.io/tsne/) and generated t-SNE
 visualization using the [code](http://cs.stanford.edu/people/karpathy/cnnembed/) provided by Andrej Karpathy.
 
+{% include image.html url="./gist/t-sne/gist-nn-small.png" description="t-SNE visualization" %}
 Please [download](./gist/t-sne/gist-nn-large.png) and zoom into different parts of the image and see how similar images are clustered together.
-{% include image.html url="./gist/t-sne/gist-nn-small.png" description="t-SNE visualization ([click here for bigger image](./gist/t-sne/gist-nn-large.png))" %}
+Thus GIST features helps in the task of Nearest Neighbor Image retrieval
 
 <sup>**Tool:** [Command line tool](https://github.com/nrupatunga/GIST-global-Image-Descripor)</sup>
 &nbsp; &nbsp; &nbsp; &nbsp;
