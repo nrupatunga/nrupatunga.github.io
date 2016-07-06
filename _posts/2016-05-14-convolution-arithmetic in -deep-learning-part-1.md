@@ -249,7 +249,7 @@ Observe that even though both has different size inputs \\(i = 5\\) and \\(i = 6
 As discussed before, this is due to the fact that kernel is not able to reach all the input units. 
 
 
-_continued in [part 2](http://localhost:4000/convolution-2/)_
+_continued in [part 2](https://nrupatunga.github.io/convolution-2/)_
 
 <a name="LR"></a>
 ## References
