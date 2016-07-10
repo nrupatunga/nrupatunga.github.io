@@ -8,7 +8,7 @@ title: Projects Code & Software
 HOG is a visual descriptor i.e., it describes the content of an image in a single feature vector. 
 The idea behind HOG is that local object appearance and shape within an image can be described by 
 the distribution of intensity gradients or edge directions.
-{% include image.html url="../assets/hog/hog-descriptor-calculation.PNG" description="HOG descriptor " %}
+{% include image.html url="./hog/hog-descriptor-calculation.PNG" description="HOG descriptor " %}
 
 As shown in the figure, we first compute the gradient map.
 HOG descriptor is calculated for a window size of 64x128, by dividing 
@@ -26,7 +26,7 @@ I trained soft margin linear SVM model on the dataset with 4419 positive samples
 negative samples. I did two iterations of **_hard negative mining_** to improve
 the results and also performed **_non-maximum suppression_** to filter the
 detection windows.
-{% include image.html url="../assets/hog/pedestriandetection.png" description="Pedestrian Detection " %}
+{% include image.html url="./hog/pedestriandetection.png" description="Pedestrian Detection " %}
 
 <sup>**Code:** [C++, Python](https://github.com/nrupatunga/Pedestrain-Detection-using-Histogram-of-Oriented-Gradients)</sup>
 <br> 
