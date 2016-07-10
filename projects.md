@@ -4,6 +4,33 @@ permalink: /project/
 title: Projects Code & Software
 ---
 
+##**Pedestrian Detection using Histogram of Oriented Gradients ( HOG )**
+HOG is a visual descriptor i.e., it describes the content of an image in a single feature vector. 
+The idea behind HOG is that local object appearance and shape within an image can be described by 
+the distribution of intensity gradients or edge directions.
+{% include image.html url="../assets/hog/hog-descriptor-calculation.PNG" description="HOG descriptor " %}
+
+As shown in the figure, we first compute the gradient map.
+HOG descriptor is calculated for a window size of 64x128, by dividing 
+it into 8x16 cells and in each cell we calculate the orientation of all
+pixels and form a 9-bin histogram of gradients. These gradients are
+normalized by overlapping block size of 2x2 cells. Finally we
+concatenate all the orientations into a single vector of length 3780.
+For more deeper understanding of HOG, please refer to this nice
+[tutorial](http://mccormickml.com/2013/05/09/hog-person-detector-tutorial/)
+
+<sup>_NOTE: Here numerical values are taken to explain the mathematics of
+HOG calculation. These values can be varied while computation_ </sup>
+
+I trained soft margin linear SVM model on the dataset with 4419 positive samples and 5380
+negative samples. I did two iterations of **_hard negative mining_** to improve
+the results and also performed **_non-maximum suppression_** to filter the
+detection windows.
+{% include image.html url="../assets/hog/pedestriandetection.png" description="Pedestrian Detection " %}
+
+<sup>**Code:** [C++, Python](https://github.com/nrupatunga/Pedestrain-Detection-using-Histogram-of-Oriented-Gradients)</sup>
+<br> 
+
 ##**Global Image Descriptor - GIST**
 GIST is the low dimensional representation of an Image. It encodes the
 structural information of the image by dividing the image into blocks,
@@ -26,7 +53,7 @@ Thus GIST features helps in the task of Nearest Neighbor Image retrieval
 &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; 
-<sup>**GIST Code:** [C++](https://github.com/nrupatunga/GIST-global-Image-Descripor)</sup>
+<sup>**Code:** [C++](https://github.com/nrupatunga/GIST-global-Image-Descripor)</sup>
 <br> 
 
 ##**Pencil Sketch**
