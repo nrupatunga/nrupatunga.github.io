@@ -26,7 +26,7 @@ I trained soft margin linear SVM model on the dataset with 4419 positive samples
 negative samples. I did two iterations of **_hard negative mining_** to improve
 the results and also performed **_non-maximum suppression_** to filter the
 detection windows.
-{% include image.html url="./hog/pedestriandetection.png" description="Pedestrian Detection " %}
+{% include image.html url="./hog/pedestriandetection.PNG" description="Pedestrian Detection " %}
 
 <sup>**Code:** [C++, Python](https://github.com/nrupatunga/Pedestrain-Detection-using-Histogram-of-Oriented-Gradients)</sup>
 <br> 
