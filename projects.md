@@ -24,7 +24,7 @@ HOG calculation. These values can be varied while computation_ </sup>
 
 I trained soft margin linear SVM model on the dataset with 4419 positive samples and 5380
 negative samples. I did two iterations of **_hard negative mining_** to improve
-the results and also performed **_non-maximum suppression_** to filter the
+the results and also performed **_non-maximum suppression_** to filter out multiple
 detection windows.
 {% include image.html url="./hog/pedestriandetection.PNG" description="Pedestrian Detection " %}
 
