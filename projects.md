@@ -13,7 +13,7 @@ the distribution of intensity gradients or edge directions.
 As shown in the figure, we first compute the gradient map.
 HOG descriptor is calculated for a window size of 64x128, by dividing 
 it into 8x16 cells and in each cell we calculate the orientation of all
-pixels and form a 9-bin histogram of gradients. These gradients are
+pixels and form a magnitude weighted 9-bin histogram of gradients. These gradients are
 normalized by overlapping block size of 2x2 cells. Finally we
 concatenate all the orientations into a single vector of length 3780.
 For more deeper understanding of HOG, please refer to this nice
