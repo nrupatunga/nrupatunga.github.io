@@ -30,7 +30,7 @@ detection windows.
 
 Out of curiosity and understanding the HOG feature space, I projected 3780 dimensional HOG features of all the images onto 2-dimensional subspace
 using a dimensionality reduction technique called [t-SNE](https://lvdmaaten.github.io/tsne/) and generated t-SNE visualization using the
-[code](http://cs.stanford.edu/people/karpathy/cnnembed/) provided by Dr. Andrej Karpathy. [Click](https://github.com/nrupatunga/nrupatunga.github.io/blob/master/project/hog/tsne.png) here for bigger image. 
+[code](http://cs.stanford.edu/people/karpathy/cnnembed/) provided by Dr. Andrej Karpathy. [Click](./hog/tsne.png) here for bigger image. 
 Observe how images are clustered.
 
 {% include image.html url="./hog/tsne.png" description="t-SNE Visualization" %}
