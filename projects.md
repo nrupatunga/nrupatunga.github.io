@@ -28,11 +28,18 @@ the results and also performed **_non-maximum suppression_** to filter out multi
 detection windows.
 {% include image.html url="./hog/pedestriandetection.PNG" description="Pedestrian Detection " %}
 
+Out of curiosity and understanding the HOG feature space, I projected 3780 dimensional HOG features of all the images onto 2-dimensional subspace
+using a dimensionality reduction technique called [t-SNE](https://lvdmaaten.github.io/tsne/) and generated t-SNE visualization using the
+[code](http://cs.stanford.edu/people/karpathy/cnnembed/) provided by Dr. Andrej Karpathy. [Click](./hog/tsne.png) here for bigger image. 
+Observe how images are clustered.
+
+{% include image.html url="./hog/tsne.png" description="t-SNE Visualization" %}
+
 <sup>**Code:** [C++, Python](https://github.com/nrupatunga/Pedestrain-Detection-using-Histogram-of-Oriented-Gradients)</sup>
 <br> 
 
 ##**Global Image Descriptor - GIST**
-GIST is the low dimensional representation of an image. It encodes the
+GIST is the low dimensional representation of an Image. It encodes the
 structural information of the image by dividing the image into blocks,
 thus providing a rough description of the image.
 The block diagram of how GIST is computed is shown below. 
@@ -41,8 +48,7 @@ For more theory, refer to this [paper](http://people.csail.mit.edu/torralba/code
 
 In order to visualize how GIST feature could encode the information of an
 image, I projected the 512-dimensional GIST feature vector to a
-2-dimensional space using dimensionality reduction technique called
-[t-SNE](https://lvdmaaten.github.io/tsne/) and generated t-SNE
+2-dimensional space using [t-SNE](https://lvdmaaten.github.io/tsne/) and generated t-SNE
 visualization using the [code](http://cs.stanford.edu/people/karpathy/cnnembed/) provided by Andrej Karpathy.
 
 {% include image.html url="./gist/t-sne/gist-nn-small.png" description="t-SNE visualization" %}
