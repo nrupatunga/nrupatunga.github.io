@@ -32,7 +32,7 @@ detection windows.
 <br> 
 
 ##**Global Image Descriptor - GIST**
-GIST is the low dimensional representation of an Image. It encodes the
+GIST is the low dimensional representation of an image. It encodes the
 structural information of the image by dividing the image into blocks,
 thus providing a rough description of the image.
 The block diagram of how GIST is computed is shown below. 
