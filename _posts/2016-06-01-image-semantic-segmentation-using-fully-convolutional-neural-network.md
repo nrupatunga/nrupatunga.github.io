@@ -14,8 +14,7 @@ Table of Contents:
 <a name="L1"></a>
 # Introduction
 In this post, I will try to give a quick theoretical background to Fully Convolutional neural Network (FCN)
-and give a little hands on understanding and training a deep FCN for Image Segmentation task.
-Minimal knowledge of neural network and convolutional network  is assumed.
+and give a little hands on understanding FCN. Minimal knowledge of neural network and convolutional network  is assumed.
 
 <a name="L2"></a>
 # Fully Connected Neural Network
