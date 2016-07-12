@@ -68,13 +68,7 @@ It is a new system to produce pencil drawings from natural images.
 This method mimicks the human style of Pencil Drawing by combining tonal
 and sketch structure.
 
-Input           |  Pencil Sketch
-:-------------------------:|:-------------------------:|
-![](./Pencil/In-1.jpg)  | ![](./Pencil/outputgraysketch.png)
-
- Color Pencil Sketch |
-:-------------------------:|
-![](./Pencil/outputcolorsketch.png)  |
+{% include image.html url="./Pencil/output-concatenate.PNG" description="" %}
 
 <sup>**Software:**  [Windows Executable](https://github.com/nrupatunga/Pencil-Sketch/releases) 
 &nbsp; &nbsp; &nbsp; &nbsp;
@@ -114,18 +108,14 @@ application can be used to experiment the following functionalities.
 ##**Bilateral Filtering**
 A [bilateral filter](http://people.csail.mit.edu/sparis/bf_course/) is a non-linear, edge-preserving and noise-reducing smoothing filter for images. 
 
-Input           |  Gaussian Filtering | Bilateral Filtering
-:-------------------------:|:-------------------------:|:----------------------:|
-![](./BilateralFilter/Input.jpg)  | ![](./BilateralFilter/GaussOutput.jpg) | ![] (./BilateralFilter/BilateralOutput.jpg )
+{% include image.html url="./BilateralFilter/BilateralOutput-concatenate.jpg" description="" %}
 <sup>**Code:** [C++](https://github.com/nrupatunga/Bilateral-Filter)<br></sup>
 
 ##**Canny Edge Detector**
 The [Canny edge detector](http://docs.opencv.org/3.1.0/da/d22/tutorial_py_canny.html#gsc.tab=0) is an edge detection 
 operator that uses a multi-stage algorithm to detect a wide range of edges in images
 
-Input           |  Canny Edge Output 
-:-------------------------:|:-------------------------:|
-![](./Canny/flower.jpg)  | ![](./Canny/cannyedge.jpg)
+{% include image.html url="./Canny/canny-concatenate.PNG" description="" %}
 <sup>**Code:** [C++](https://github.com/nrupatunga/Canny-Edge-Detector)</sup>
 <br>
 
