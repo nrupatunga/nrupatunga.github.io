@@ -2,8 +2,7 @@
 layout: page
 title: About me
 ---
-
-![](./profile-photo.PNG)
+{% include image.html url="./profile-photo.PNG" description="" %}
 
 I am currently working as Technical Lead in Media Analytics &
 Recognition Team at [Samsung R&amp;D
