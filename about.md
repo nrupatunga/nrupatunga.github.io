@@ -13,5 +13,5 @@ Bangalore](http://ece.iisc.ernet.in/).
 My current interest is on applying Deep Learning for scene understanding which includes scene classification, detection, recognition and segmentation. 
 
 I am fascinated by how deep learning models have reached human accuracy in these tasks.
-I am very enthusiatic towards reverse engineering these deep networks to understand what each layers in the network have learnt.
+I am very enthusiastic towards reverse engineering these deep networks to understand what each layers in the network have learnt.
 I am currently working on Semantic Image Segmentation problem.
