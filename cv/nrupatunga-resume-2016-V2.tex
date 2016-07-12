@@ -1,0 +1,204 @@
+% resume.tex
+%
+% (c) 2002 Matthew Boedicker <mboedick@mboedick.org> (original author) http://mboedick.org
+% (c) 2003-2007 David J. Grant <davidgrant-at-gmail.com> http://www.davidgrant.ca
+% (c) 2007-2014 Todd C. Miller <Todd.Miller@courtesan.com> http://www.courtesan.com/todd
+% (c) 2016 Nrupatunga <https://nrupatunga.github.io/>
+%
+% This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+
+\documentclass[letterpaper,11pt]{article}
+
+%-----------------------------------------------------------
+\usepackage[empty]{fullpage}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage{verbatim}
+\usepackage{marvosym}
+\usepackage{fontspec}
+\usepackage{fontawesome}
+\definecolor{mygrey}{gray}{0.80}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Adjust margins to 0.5in on all sides
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\topmargin}{-0.5in}
+\addtolength{\textheight}{1.0in}
+
+%-----------------------------------------------------------
+%Custom commands
+\def\CC{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+%\newcommand{\CC}{C\nolinebreak\hspace{-.05em}\raisebox{.4ex}{\tiny\bf +}\nolinebreak\hspace{-.10em}\raisebox{.4ex}{\tiny\bf +}}
+\newcommand*{\Cpp}{C\ensuremath{++}\xspace}
+\newcommand*{\phoneB}{{\fontspec{symbola.ttf}\symbol{"260E}}}
+\newcommand{\resitem}[1]{\item #1 \vspace{-2pt}}
+\newcommand{\resheading}[1]{{\large \colorbox{mygrey}{\begin{minipage}{\textwidth}{\textbf{#1 \vphantom{p\^{E}}}}\end{minipage}}}}
+\newcommand{\ressubheading}[4]{
+	\begin{tabular*}{7.0in}{l@{\extracolsep{\fill}}r}
+		\textbf{#1} & #2 \\
+		\textit{#3} & \textit{#4} \\
+	\end{tabular*}\vspace{-6pt}}
+%-----------------------------------------------------------
+
+\begin{document}
+
+\begin{tabular*}{7.5in}{l@{\extracolsep{\fill}}r}
+	\textbf{\Large Nrupatunga}  & \faMobile \hspace{1mm}\emph{+91-9972716433}\\
+	&\faGlobe \hspace{1mm} \href{https://nrupatunga.github.io/}{\emph{https://nrupatunga.github.io/}}\\
+	&\faEnvelope \hspace{1mm}\emph{nrupatunga.tunga@gmail.com} \\
+	%&  \faLinkedin \hspace{1mm}\emph{https://in.linkedin.com/in/nrupatunga} \\
+	%&\faGithub \hspace{1mm} \href{https://github.com/nrupatunga}{\emph{https://github.com/nrupatunga}} \\
+\end{tabular*}
+\\
+
+\vspace{0.1in}
+\resheading{Research Interest}
+\begin{itemize}
+		\resitem{My current interest and focus is on applying machine learning and deep learning for scene understanding which includes scene classification, detection, recognition and segmentation.}
+		%\resitem{I have strong interest towards deep network compression and reverse engineering these networks to understand what each layers in the network have learnt from the scene for the required task.}
+\end{itemize}
+
+\resheading{Education}
+\begin{itemize}
+	\item
+		\ressubheading{Indian Institute of Science}{Bangalore, Karnataka}{Master of Engineering in Signal Processing}{2010 - 2012}
+		\begin{itemize}
+				\resitem{Master Thesis: Complex Network Approach for Analysis of Biomedical signals}
+				\resitem{CGPA: 5.8/8.0}
+				\resitem{Advisor: Prof. D. Narayana Dutt}
+		\end{itemize}
+	\item
+		\ressubheading{Sri Jayachamarajendra College of Engineering}{Mysore, Karnataka}{Bachelor of Engineering in Electronics and Communication }{2005 - 2009}
+		\begin{itemize}
+				\resitem{Percentage: 71.14\%}
+		\end{itemize}
+
+\end{itemize}
+
+\resheading{Work Experience}
+\begin{itemize}
+	\item
+		\ressubheading{Samsung R\&D India}{Bangalore}{Technical Lead, Media Analytics and Recognition Team}{2016-Present}
+		\vspace{1mm}
+		\begin{itemize}
+				% Project-1 
+				\resitem[]{\faCircleO
+					\hspace{1mm}\textbf{\emph{Project: Semantic Segmentation of Sky and Non-sky regions in an image using Fully Convolutional Neural Network}}}
+				\begin{itemize}
+						\resitem{Fine tuned the weights of the pretrained VGG-16 net, for the task of sky/non-sky segmentation. Accuracy achieved on validation and test dataset >95\%}
+						\resitem{Investigated the features learnt in each layer of the network}
+						\resitem{Experimentation on using sky segmentation map as prior for horizon detection}
+						\resitem{Languages \& Tools used - Python, Caffe}
+				\end{itemize}
+				\vspace{1mm}
+				% Project-2
+				\resitem[]{\faCircleO \hspace{1mm}\textbf{\emph{Project: Nearest Neighbor Image retrieval using GIST}}}
+				\begin{itemize}
+						\resitem{Developed code for extracting GIST descriptor for images}
+						\resitem{Evaluated GIST descriptor for task of Image retrieval}
+						\resitem{Demonstrated how GIST descriptor can be used for detection of duplicate images }
+						\resitem{Languages \& Tools used - \CC, OpenCV, MATLAB}
+				\end{itemize}
+		\end{itemize}
+		%\vspace{1mm}
+	%\item
+		%\ressubheading{Samsung R\&D India}{Bangalore}{Lead Engineer, AVI Solutions Team}{2014-2016}
+		\ressubheading{}{}{Lead Engineer, AVI Solutions Team}{2014-2016}
+		\vspace{1mm}
+		\begin{itemize}
+				% Project-1 
+				\resitem[]{\faCircleO \hspace{1mm}\textbf{\emph{Project: Histogram of Oriented Gradients for Pedestrian Detection}}}
+				\begin{itemize}
+						\resitem{Code developed for extracting HOG features, detection and for filtering detection windows}
+						\resitem{Trained SVM on augmented INRIA dataset }
+						\resitem{Demonstrated how hard negative mining and adding non maximum suppression module helps in improving the accuracy of object detection}
+						\resitem{Languages \& Tools used - \CC, OpenCV, Python, SVMLight}
+				\end{itemize}
+
+				\vspace{1mm}
+				% Project-2 
+				\resitem[]{\faCircleO \hspace{1mm}\textbf{\emph{Project: Combining Sketch and Tone for Pencil Drawing Production}}}
+				\begin{itemize}
+						\resitem{Code developed for color pencil sketch effect for images which mimicks human style of pencil drawing}
+						\resitem{Designed a GUI using QT}
+						\resitem{Languages \& Tools used - \CC, OpenCV, QT}
+				\end{itemize}
+				\vspace{3mm}
+				% Project-3
+				\resitem[]{\faCircleO \hspace{1mm}\textbf{\emph{Project: Auto Image Enhancement (Galaxy S6 onwards)}}}
+				\begin{itemize}
+						\resitem{Developed algorithm for detection of low-light/backlight images}
+						\resitem{Developed algorithm for detection of poorly lit faces in an image}
+						\resitem{Complete architecture design of auto image enhancement engine }
+						\resitem{Complete JNI framework design \& development for communicating between application and engine}
+						\resitem{Languages \& Tools used - C, Matlab}
+				\end{itemize}
+		\end{itemize}
+		%\vspace{1mm}
+	%\item
+		%\ressubheading{Samsung R\&D India}{Bangalore}{Senior Software Engineer, Multimedia Solutions Team}{2012-2014}
+		\ressubheading{}{}{Senior Software Engineer, Multimedia Solutions Team}{2012-2014}
+		\begin{itemize}
+				\resitem[]{\faCircleO \hspace{1mm}\textbf{\emph{Project: Photo Editor, Best Photo.}}}
+				\begin{itemize}
+						\resitem{Developed red eye correction algorithm. GUI developed using Matlab GUIDE for quick demo }
+						\resitem{Implemented image blur detection and ranking algorithms}
+						\resitem{Implemented bilinear resizer module for less memory architecture in Photo Editor}
+						\resitem{Optimization of Photo Editor effects using POSIX threads}
+						\resitem{Languages \& Tools used - C, \CC, Matlab}
+				\end{itemize}
+				\vspace{1mm}
+				\resitem[]{\faCircleO \hspace{1mm}\textbf{\emph{Project: Touch Focus (Galaxy S5 onwards)}}}
+				\begin{itemize}
+						\resitem{Complete JNI framework design \& development for communicating between application and engine}
+				\end{itemize}
+		\end{itemize}
+
+\end{itemize}
+
+\resheading{Hobby Projects}
+\begin{enumerate}
+	\item Implementation of Canny Edge Detector. Languages \& Tools used - \CC, OpenCV
+	\item Implementation of Bilateral filter. Languages \& Tools used - \CC, OpenCV
+	\item QT based GUI Application for experimenting edge detectors such as Sobel \& Canny, blurring filters such as homogeneous, median, Gaussian \& bilateral
+		Languages \& Tools used - \CC, OpenCV, QT
+	\item Image Watermarking Algorithm based on DWT DCT and SVD.  Languages \& Tools used - MATLAB
+\end{enumerate}
+
+\resheading{Recognition}
+\begin{enumerate}
+	\item Awarded Galaxy S5 for the success of Touch Focus USP
+	\item Awarded Employee of the month - Jan 2016
+\end{enumerate}
+
+\resheading{Relevant Coursework}
+\begin{description}
+	\item[Signal Processing Courses:]
+		Digital Image Processing, DSP System Design, Biomedical Signal Processing, Speech Information Processing
+	\item[Mathematical Courses:]
+		Linear Algebra, Probability \& Random Process, Detection \& Estimation Theory, Mathematics for Electrical Engineers
+	\item[Deep Learning (ongoing):]
+		Learning from Data (Abu Mostafa), Machine Learning (Andrew Ng), UFLDL (Stanford).
+\end{description}
+
+\resheading{Skills}
+\begin{description}
+	\item[Programming Languages:]
+		C, \CC, MATLAB, Python
+	\item[Tools \& Framework:]
+		Caffe Deep Learning Framework, Microsoft Visual Studio, QT, Eclipse, Android JNI/NDK
+	\item[Work Productivity Tools:] Vim, tmux
+\end{description}
+
+\end{document}
