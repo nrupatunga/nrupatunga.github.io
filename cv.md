@@ -4,4 +4,10 @@ permalink: /cv/
 title: CV
 ---
 
-Available in pdf form [on this very site](/assets/nrupatunga-resume-2016.pdf)
+<sup>Available in pdf form on this very site
+
+#### Links
+
+<sup>[CV with code and software links ](./nrupatunga-resume-2016-V1.pdf)</sup>
+
+<sup>[CV without code and software links](./nrupatunga-resume-2016-V2.pdf)</sup>
