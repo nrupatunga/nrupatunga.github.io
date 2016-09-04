@@ -14,4 +14,5 @@ My current interest is on applying Deep Learning for scene understanding which i
 
 I am fascinated by how deep learning models have reached human accuracy in these tasks.
 I am very enthusiastic towards reverse engineering these deep networks to understand what each layers in the network have learnt.
-I am currently working on Semantic Image Segmentation problem.
+
+I thoroughly work on developing deep learning models for Image recognition task on mobile. More specifically this includes developing models keeping accuracy, speed and space constraints in mind. 
