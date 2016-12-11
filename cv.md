@@ -8,6 +8,4 @@ title: CV
 
 #### Links
 
-<sup>[CV with code and software links ](./nrupatunga-resume-2016-V1.pdf)</sup>
-
-<sup>[CV without code and software links](./nrupatunga-resume-2016-V2.pdf)</sup>
+<sup>[CV](./nrupatunga-cv.pdf)</sup>
