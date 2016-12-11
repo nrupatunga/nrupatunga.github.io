@@ -8,4 +8,4 @@ title: CV
 
 #### Links
 
-<sup>[CV](./nrupatunga-cv.pdf)</sup>
+<sup>[CV](./CV/nrupatunga-cv.pdf)</sup>
