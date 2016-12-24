@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /cv/
-title: CV
+title: Resume
 ---
 
 <sup>Available in pdf form on this very site
