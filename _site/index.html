@@ -1,174 +1,361 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Nrupatunga</title>
 
-  <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="author" content="Nrupatunga" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <link rel="alternate" type="application/rss+xml" href="/atom.xml" />
 
-  <title>
-    
-      Posts &middot; NRUPATUNGA
-    
-  </title>
+  <link href="/vendor/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/vendor/css/academicons.min.css" rel="stylesheet">
+  <link href="/vendor/pygments/default.css" rel="stylesheet">
+  <link href="/css/bamos.css" rel="stylesheet">
+  <link href="/css/sharingbuttons.css" rel="stylesheet">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/lanyon.css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
-
-  <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/public/favicon.ico">
-
-  <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
-
-  <body class="theme-base-08 sidebar-overlay">
-    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
-     styles, `#sidebar-checkbox` for behavior. -->
-<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
-<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" checked>-->
-<!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" >-->
-
-<!-- Toggleable sidebar -->
-<div class="sidebar" id="sidebar">
-  <div class="sidebar-item">
-    <p>This is my personal website, where you can find out what am I currently doing in my life. <br><br>I write articles on Computer Vision, Machine Learning and Deep Learning with a good mixture of theory and hands on.</p>
-  </div>
-
-  <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home</a>
-
-    
-
-    
-    
-      
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="/about/">About me</a>
-        
-      
-    
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="/cv/">CV</a>
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="/project/">Projects & Software</a>
-        
-      
-    
-      
-        
-      
-    
-
-  </nav>
-
-  <div class="sidebar-item">
-    <p>
-      &copy; 2016. All rights reserved.
-    </p>
-  </div>
-</div>
-
-
-    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
-         content to avoid any CSS collisions with our real content. -->
-    <div class="wrap">
-      <div class="masthead">
-        <div class="container">
-          <label for="sidebar-checkbox" class="sidebar-toggle"></label>
-
-          <h3 class="masthead-title">
-            <a href="/" title="Home">NRUPATUNGA</a>
-            <small>Computer Vision & Machine Learning Enthusiast</small>
-          </h3>
-        </div>
-      </div>
-
-      <div class="container content">
-        <div id='bump'>
-	<section class="article archive">
-		<article class="archive-wrap">
-			<ol class="post-list">
-				<lh><h2><span class="bb">Posts</span></h2></lh>
-				
-				<div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-					<h1><a href="/netsurgery/">Net Surgery in Caffe</a></h1>
-					<p class="date"><time datetime="2016-06-01T00:00:00+05:30" itemprop="datePublished">June 01, 2016</time></p>
-					<p class=""></p>
+<body>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="navbar-header">
+						  <a href="/" class="navbar-brand">
+                  <div>
+                      <img src="/images/me-circle.jpg" class="img-circle"></img>
+		      Nrupatunga
+                  </div>
+              </a>
+						<button class="navbar-toggle" type="button" data-toggle="collapse"
+                    data-target="#navbar-main">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="navbar-collapse collapse" id="navbar-main">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="/">About</a>
+							</li>
+							<li>
+								<a href="/blog/">Posts</a>
+							</li>
+							<li>
+								<a href="/project/">Project</a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right" style="font-size: 1.5em">
+							<li>
+								<a href="https://nrupatunga.github.io/cv/nrupatunga-resume.pdf" target="_blank">
+									<i class="fa fa-cloud-download"></i></a>
+							</li>
+							<li>
+								<a href="http://github.com/Nrupatunga" target="_blank">
+									<i class="fa fa-github"></i></a>
+							</li>
+							<li>
+								<a href="https://in.linkedin.com/in/nrupatunga" target="_blank">
+									<i class="fa fa-linkedin"></i></a>
+							</li>
+							
+								
+									
+							
+						</ul>
+					</div>
 				</div>
-				
-				<div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-					<h1><a href="/fcn-segmentation/">Image Semantic Segmentation Using Fully Convolutional Neural Network</a></h1>
-					<p class="date"><time datetime="2016-06-01T00:00:00+05:30" itemprop="datePublished">June 01, 2016</time></p>
-					<p class=""></p>
-				</div>
-				
-				<div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-					<h1><a href="/convolution-2/">Convolution Arithmetic in  Deep Learning Part 2</a></h1>
-					<p class="date"><time datetime="2016-05-14T00:00:00+05:30" itemprop="datePublished">May 14, 2016</time></p>
-					<p class=""></p>
-				</div>
-				
-				<div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-					<h1><a href="/convolution-1/">Convolution Arithmetic in  Deep Learning Part 1</a></h1>
-					<p class="date"><time datetime="2016-05-14T00:00:00+05:30" itemprop="datePublished">May 14, 2016</time></p>
-					<p class=""></p>
-				</div>
-				
-				<div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-					<h1><a href="/2016/05/13/Python-Learning-Notebook/">Python learning notebook</a></h1>
-					<p class="date"><time datetime="2016-05-13T00:00:00+05:30" itemprop="datePublished">May 13, 2016</time></p>
-					<p class=""></p>
-				</div>
-				
-				<div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-					<h1><a href="/GilbertStrang-1/">Linear Algebra Part 1</a></h1>
-					<p class="date"><time datetime="2016-05-03T00:00:00+05:30" itemprop="datePublished">May 03, 2016</time></p>
-					<p class=""></p>
-				</div>
-				
-			</ol>
-		</article>
-	</section>
-</div>
-
-<hr>
-<footer class="site-footer">
-	<div class="inner">
-		<section class="footer-social">
-		    <a href="//github.com/nrupatunga" target="_blank" title="GitHub"><i class="fa fa-2x fa-fw fa-github"></i> <span class="hidden">GitHub</span></a>&nbsp;
-		    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-		    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-		    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
-		    <a href="https://in.linkedin.com/in/nrupatunga" target="_blank" title="linkedin"><i class="fa fa-2x fa-fw fa-rss"></i> <span class="hidden">Linkedin</span></a>
-		</section>
+			</div>
+		</div>
 	</div>
-</footer>
 
-      </div>
+  <div class="container">
+  <div class="row">
+    
+      
+      
+	      
+      
+      
+      
+        
+		
+		
+      
+      
+	
+      
+      
+
+      
+        
+          
+        
+        
+      
+
+    
+    
+      
+        
+             
+             
+      
+    
+  
+  <br>
+  </br>
+
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2 id="my-interests">My Interests</h2>
+<table class="table table-hover">
+<td class="col-md-3">
+My current research is focused on applying Deep Learning to Visual SLAM. This
+includes improving different components of the Visual SLAM by adding
+contextual information to the existing pipeline. 
+
+Previously, I have worked on developing deep learning models for
+classification, recognition and segmentation problems. I was also
+involved in design and development of image processing &amp; computer vision
+algorithms with hands on C-level and multi-threaded optimisation of
+image processing modules.
+</td>
+</table>
+
+<h2 id="industry-experience">Industry Experience</h2>
+<table class="table table-hover"> 
+<tr>
+  <td class="col-md-3">2017 - Present</td>
+  <td>
+    <strong>Deep Learning Research Engineer, Whodat<sup>TM</sup></strong>
+  </td>
+</tr>
+
+<tr>
+  <td class="col-md-3">2016 - 2017</td>
+  <td>
+    <strong>Technical Lead, Samsung R&amp;D India</strong>
+    <br />
+    Media Analytics &amp; Recognition Team
+  </td>
+</tr>
+<tr>
+  <td class="col-md-3">2014 - 2016</td>
+  <td>
+    <strong>Lead Engineer, Samsung R&amp;D India</strong> <br />
+    Audio, Video &amp; Imaging Solutions Team
+  </td>
+</tr>
+<tr>
+  <td class="col-md-3">2012 - 2014</td>
+  <td>
+    <strong>Senior Software Engineer, Samsung R&amp;D India</strong>
+    <br />
+    Multimedia Solutions Team
+  </td>
+</tr>
+</table>
+
+<h2 id="education">Education</h2>
+<table class="table table-hover">
+  <tr>
+    <td class="col-md-3">2010 - 2012</td>
+    <td>
+        <strong>Masters in Signal Processing</strong>
+	(5.8/7.0)
+        <br />
+	Thesis: Complex Network Approach for Analysis of
+	Biomedical signals (ECG, EEG)
+        <br />
+      Indian Institute of Science, Bangalore
+    </td>
+  </tr>
+  <tr>
+    <td class="col-md-3">2005 - 2009</td>
+    <td>
+        <strong>Bachelors in Electronic and Communication Engineering</strong>
+        <br />
+	Sri Jayachamarajendra College of Engineering, Mysore
+    </td>
+  </tr>
+</table>
+
+<h2 id="skills">Skills</h2>
+<table class="table table-hover">
+<tr>
+  <td class="col-md-2">Languages</td>
+  <td>
+      <p>C, C++, Matlab, Python</p>
+    </td>
+</tr>
+<tr>
+  <td class="col-md-2">Deep Learning Frameworks</td>
+  <td>
+      <p>Caffe, TensorFlow</p>
+    </td>
+</tr>
+<tr>
+  <td class="col-md-2">OS</td>
+  <td>
+      <p>Linux, Windows</p>
+    </td>
+</tr>
+<tr>
+  <td class="col-md-2">Miscellaneous Productivity Tools</td>
+  <td>
+      <p>Vim, LaTex, Tmux, Visual Studio, Eclipse, Android NDK</p>
+    </td>
+</tr>
+</table>
+
+<h2 id="projects--codes">Projects &amp; Codes</h2>
+
+<table class="table table-hover">
+    <tr>
+    <td class="col-md-3"><a href="" target="_blank"><img src="images/project_images/charnn.jpeg" /></a> </td>
+    <td>
+    <strong>Character Prediction using RNN &amp; LSTM (using numpy library)</strong><br />
+    [<a href="https://github.com/nrupatunga/char-rnn" target="_blank">code-rnn</a>]
+    [<a href="https://github.com/nrupatunga/char-RNN-LSTM" target="_blank">code-lstm</a>] <br />
+    </td>
+    </tr>
+    <tr>
+
+    <td class="col-md-3"><a href="" target="_blank"><img src="images/project_images/pedestriandetection.PNG" /></a> </td>
+    <td>
+    <strong>Pedestrian Detection using Histogram of Oriented Gradients (HOG)</strong><br />
+    [<a href="/project/#pedestrian-detection-using-histogram-of-oriented-gradients--hog-" target="_blank">project page</a>] 
+    [<a href="https://github.com/nrupatunga/Pedestrain-Detection-using-Histogram-of-Oriented-Gradients" target="_blank">code</a>] <br />
+    </td>
+    </tr>
+    
+    <tr>
+    <td class="col-md-3"><a href="" target="_blank"><img src="images/project_images/gist.png" /></a> </td>
+    <td>
+    <strong>Global Image Descriptor (GIST)</strong><br />
+    [<a href="/project/#global-image-descriptor---gist" target="_blank">project page</a>]  [<a href="https://github.com/nrupatunga/GIST-global-Image-Descripor" target="_blank">code</a>]
+    [<a href="https://github.com/nrupatunga/GIST-global-Image-Descripor" target="_blank">executable</a>] <br />
+    </td>
+    </tr>
+    <tr>
+    <td class="col-md-3"><a href="" target="_blank"><img src="images/project_images/ColorPencilSketch.PNG" /></a> </td>
+    <td>
+        <strong>Color Pencil Sketch</strong><br />
+	[<a href="/project/#pencil-sketch" target="_blank">project page</a>]  [<a href="https://github.com/nrupatunga/Color-Pencil-Sketch" target="_blank">code</a>]
+	[<a href="https://nrupatunga-gmail.tinytake.com/sf/NzQwOTk5XzM0MTEzOTM" target="_blank">video</a>]
+	[<a href="https://github.com/nrupatunga/Color-Pencil-Sketch/releases" target="_blank">software</a>]<br />
+    </td>
+    </tr>
+    
+    <tr>
+    <td class="col-md-3"><a href="" target="_blank"><img src="images/project_images/VisionToolBox.PNG" /></a> </td>
+    <td>
+        <strong>Basic Computer Vision Toolbox</strong><br />
+	[<a href="/project/#image-processing-toolbox" target="_blank">project page</a>]  [<a href="https://nrupatunga-gmail.tinytake.com/sf/NzUyNTg4XzM0NDE0OTM" target="_blank">video</a>]
+	[<a href="https://github.com/nrupatunga/Computer-Vision-Tool" target="_blank">software</a>]<br />
+    </td>
+    </tr>
+</table>
+
+<p><!--+ Linear Algebra-->
+ <!--+ Probability & Random Process-->
+ <!--+ Detection & Estimation Theory-->
+ <!--+ Speech Information Processing-->
+ <!--+ Biomedical Signal Processing-->
+ <!--+ Digital Image Processing-->
+<!--+ Learning from Data, Yaser S. Abu-Mostafa-->
+<!--+ Machine Learning, Andrew Ng-->
+<!--+ CS231, Stanford-->
+<!--+ Probabistic Graphical Models, Daphne Koller [<a href='https://www.coursera.org/account/accomplishments/certificate/72PXZST3HH6Y' target='_blank'>Certificate-Part-1</a>]--></p>
+
+<!--<table class="table table-hover">-->
+<!--<tr>-->
+<p><!--<td class='col-md-2'>2016</td>-->
+  <!--<td>-->
+  <!--Employee of the Month Award-->
+    <!--[>  <]-->
+  <!--</td>-->
+<!--</tr>-->
+<!--<tr>-->
+  <!--<td class='col-md-2'>2014</td>-->
+  <!--<td>-->
+  <!--Recognition for contribution to Touch Focus solution (USP in Galaxy S5)-->
+    <!--[>  <]-->
+  <!--</td>-->
+<!--</tr>-->
+<!--</table>--></p>
+
+<!--<h3><a href="/blog">View all</a></h3>-->
+<!--<table class="table table-hover">-->
+<p><!---->
+    <!---->
+    <!--<tr>-->
+      <!--<td><a href="/2016/06/01/net-surgery-in-caffe/">Net Surgery in Caffe</a></td>-->
+      <!--<td class="col-md-3" style="text-align: right;">June  1, 2016</td>-->
+    <!--</tr>-->
+    <!---->
+  <!---->
+    <!---->
+    <!--<tr>-->
+      <!--<td><a href="/2016/06/01/image-semantic-segmentation-using-fully-convolutional-neural-network/">Image Semantic Segmentation Using Fully Convolutional Neural Network</a></td>-->
+      <!--<td class="col-md-3" style="text-align: right;">June  1, 2016</td>-->
+    <!--</tr>-->
+    <!---->
+  <!---->
+    <!---->
+    <!--<tr>-->
+      <!--<td><a href="/convolution-2/">Convolution Arithmetic in  Deep Learning Part 2</a></td>-->
+      <!--<td class="col-md-3" style="text-align: right;">May 15, 2016</td>-->
+    <!--</tr>-->
+    <!---->
+  <!---->
+    <!---->
+    <!--<tr>-->
+      <!--<td><a href="/2016/05/14/convolution-arithmetic-in-deep-learning-part-1/">Convolution Arithmetic in Deep Learning: Part-1</a></td>-->
+      <!--<td class="col-md-3" style="text-align: right;">May 14, 2016</td>-->
+    <!--</tr>-->
+    <!---->
+  <!---->
+<!--</table>--></p>
+
+<!--+ [python-Learning](https://github.com/nrupatunga/Learning-Python):-->
+<!--+ [config](https://github.com/bamos/dotfiles):-->
+<p><!--[vim](https://github.com/nrupatunga/tmux-vim),-->
+  <!--[tmux](https://github.com/nrupatunga/tmux-vim).--></p>
+
+<!--Last updated on 2017-02-04
+-->
+<p><br /></p>
+
     </div>
+  </div>
+</div>
 
-  </body>
+
+  <script src="/js/sp.js"></script>
+  <script src="/vendor/js/jquery.min.js"></script>
+  <script src="/vendor/js/bootstrap.min.js"></script>
+  <script src="/vendor/js/anchor.min.js"></script>
+  <script src="/vendor/js/jquery.toc.js"></script>
+  <script type="text/javascript">
+   try {
+       var snowplowTracker = Snowplow.getTrackerUrl('joule.isr.cs.cmu.edu:8081');
+       snowplowTracker.enableLinkTracking();
+       snowplowTracker.trackPageView();
+   } catch (err) {}
+
+   $("#toc").toc({
+       'headings': 'h2,h3'
+   });
+   anchors.add('h2,h3');
+  </script>
+
+</body>
+
 </html>

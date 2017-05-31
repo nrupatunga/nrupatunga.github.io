@@ -1,4 +1,16 @@
-<table class="image">
-<caption align="bottom">{{ include.description }}</caption>
-<tr><td><img src="{{ include.url }}" style="max-width: 100%; height: auto;" alt="{{ include.description }}"/></td></tr>
-</table>
+{% comment %}
+Source: https://superdevresources.com/image-caption-jekyll/
+{% endcomment %}
+
+<div class="image-wrapper" >
+{% if include.url %}
+<a href="{{ include.url }}" title="{{ include.title }}" target="_blank">
+{% endif %}
+<img src="{{ include.img }}" alt="{{ include.title }}"/>
+{% if include.url %}
+</a>
+{% endif %}
+{% if include.caption %}
+<p class="image-caption">{{ include.caption }}</p>
+{% endif %}
+</div>

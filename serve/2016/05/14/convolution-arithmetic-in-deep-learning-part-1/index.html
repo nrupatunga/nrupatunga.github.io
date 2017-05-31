@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Convolution Arithmetic in Deep Learning: Part-1</title>
+
+  <meta name="author" content="Nrupatunga" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="alternate" type="application/rss+xml" href="/atom.xml" />
+
+  <link href="/vendor/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/vendor/css/academicons.min.css" rel="stylesheet">
+  <link href="/vendor/pygments/default.css" rel="stylesheet">
+  <link href="/css/bamos.css" rel="stylesheet">
+  <link href="/css/sharingbuttons.css" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="navbar-header">
+						  <a href="/" class="navbar-brand">
+                  <div>
+                      <img src="/images/me-circle.jpg" class="img-circle"></img>
+		      Nrupatunga
+                  </div>
+              </a>
+						<button class="navbar-toggle" type="button" data-toggle="collapse"
+                    data-target="#navbar-main">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="navbar-collapse collapse" id="navbar-main">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="/">About</a>
+							</li>
+							<li>
+								<a href="/blog/">Posts</a>
+							</li>
+							<li>
+								<a href="/project/">Project</a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right" style="font-size: 1.5em">
+							<li>
+								<a href="https://nrupatunga.github.io/cv/nrupatunga-resume.pdf" target="_blank">
+									<i class="fa fa-cloud-download"></i></a>
+							</li>
+							<li>
+								<a href="http://github.com/Nrupatunga" target="_blank">
+									<i class="fa fa-github"></i></a>
+							</li>
+							<li>
+								<a href="https://in.linkedin.com/in/nrupatunga" target="_blank">
+									<i class="fa fa-linkedin"></i></a>
+							</li>
+							
+								
+									
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <br/>
+<div class="container">
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+  <h1>Convolution Arithmetic in Deep Learning: Part-1</h1>
+<em>May 14, 2016</em>
+<br>
+
+<!-- From: http://sharingbuttons.io/ -->
+
+<!-- Sharingbutton Twitter -->
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Convolution Arithmetic in Deep Learning: Part-1 by @brandondamos &amp;url=http://nrupatunga.github.io/2016/05/14/convolution-arithmetic-in-deep-learning-part-1/" target="_blank" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+        <g>
+            <path d="M23.444,4.834c-0.814,0.363-1.5,0.375-2.228,0.016c0.938-0.562,0.981-0.957,1.32-2.019c-0.878,0.521-1.851,0.9-2.886,1.104 C18.823,3.053,17.642,2.5,16.335,2.5c-2.51,0-4.544,2.036-4.544,4.544c0,0.356,0.04,0.703,0.117,1.036 C8.132,7.891,4.783,6.082,2.542,3.332C2.151,4.003,1.927,4.784,1.927,5.617c0,1.577,0.803,2.967,2.021,3.782 C3.203,9.375,2.503,9.171,1.891,8.831C1.89,8.85,1.89,8.868,1.89,8.888c0,2.202,1.566,4.038,3.646,4.456 c-0.666,0.181-1.368,0.209-2.053,0.079c0.579,1.804,2.257,3.118,4.245,3.155C5.783,18.102,3.372,18.737,1,18.459 C3.012,19.748,5.399,20.5,7.966,20.5c8.358,0,12.928-6.924,12.928-12.929c0-0.198-0.003-0.393-0.012-0.588 C21.769,6.343,22.835,5.746,23.444,4.834z"/>
+        </g>
+    </svg>
+    </div>
+  </div>
+</a>
+
+<!-- Sharingbutton Facebook -->
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=http://nrupatunga.github.io/2016/05/14/convolution-arithmetic-in-deep-learning-part-1/" target="_blank" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+        <g>
+            <path d="M18.768,7.465H14.5V5.56c0-0.896,0.594-1.105,1.012-1.105s2.988,0,2.988,0V0.513L14.171,0.5C10.244,0.5,9.5,3.438,9.5,5.32 v2.145h-3v4h3c0,5.212,0,12,0,12h5c0,0,0-6.85,0-12h3.851L18.768,7.465z"/>
+        </g>
+    </svg>
+    </div>
+  </div>
+</a>
+
+<!-- Sharingbutton Google+ -->
+<a class="resp-sharing-button__link" href="https://plus.google.com/share?url=http://nrupatunga.github.io/2016/05/14/convolution-arithmetic-in-deep-learning-part-1/" target="_blank" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--google resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+        <g>
+            <path d="M11.366,12.928c-0.729-0.516-1.393-1.273-1.404-1.505c0-0.425,0.038-0.627,0.988-1.368 c1.229-0.962,1.906-2.228,1.906-3.564c0-1.212-0.37-2.289-1.001-3.044h0.488c0.102,0,0.2-0.033,0.282-0.091l1.364-0.989 c0.169-0.121,0.24-0.338,0.176-0.536C14.102,1.635,13.918,1.5,13.709,1.5H7.608c-0.667,0-1.345,0.118-2.011,0.347 c-2.225,0.766-3.778,2.66-3.778,4.605c0,2.755,2.134,4.845,4.987,4.91c-0.056,0.22-0.084,0.434-0.084,0.645 c0,0.425,0.108,0.827,0.33,1.216c-0.026,0-0.051,0-0.079,0c-2.72,0-5.175,1.334-6.107,3.32C0.623,17.06,0.5,17.582,0.5,18.098 c0,0.501,0.129,0.984,0.382,1.438c0.585,1.046,1.843,1.861,3.544,2.289c0.877,0.223,1.82,0.335,2.8,0.335 c0.88,0,1.718-0.114,2.494-0.338c2.419-0.702,3.981-2.482,3.981-4.538C13.701,15.312,13.068,14.132,11.366,12.928z M3.66,17.443 c0-1.435,1.823-2.693,3.899-2.693h0.057c0.451,0.005,0.892,0.072,1.309,0.2c0.142,0.098,0.28,0.192,0.412,0.282 c0.962,0.656,1.597,1.088,1.774,1.783c0.041,0.175,0.063,0.35,0.063,0.519c0,1.787-1.333,2.693-3.961,2.693 C5.221,20.225,3.66,19.002,3.66,17.443z M5.551,3.89c0.324-0.371,0.75-0.566,1.227-0.566l0.055,0 c1.349,0.041,2.639,1.543,2.876,3.349c0.133,1.013-0.092,1.964-0.601,2.544C8.782,9.589,8.363,9.783,7.866,9.783H7.865H7.844 c-1.321-0.04-2.639-1.6-2.875-3.405C4.836,5.37,5.049,4.462,5.551,3.89z"/>
+            <polygon points="23.5,9.5 20.5,9.5 20.5,6.5 18.5,6.5 18.5,9.5 15.5,9.5 15.5,11.5 18.5,11.5 18.5,14.5 20.5,14.5 20.5,11.5  23.5,11.5 	"/>
+        </g>
+    </svg>
+    </div>
+  </div>
+</a>
+
+<!-- Sharingbutton LinkedIn -->
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://nrupatunga.github.io/2016/05/14/convolution-arithmetic-in-deep-learning-part-1/&amp;title=Convolution Arithmetic in Deep Learning: Part-1&amp;summary=Convolution Arithmetic in Deep Learning: Part-1&amp;source=http://nrupatunga.github.io/2016/05/14/convolution-arithmetic-in-deep-learning-part-1/" target="_blank" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+        <g>
+            <path d="M6.527,21.5h-5v-13h5V21.5z M4.018,6.5H3.988C2.478,6.5,1.5,5.318,1.5,4.019c0-1.329,1.008-2.412,2.547-2.412 c1.541,0,2.488,1.118,2.519,2.447C6.565,5.354,5.588,6.5,4.018,6.5z M15.527,12.5c-1.105,0-2,0.896-2,2v7h-5c0,0,0.059-12,0-13h5 v1.485c0,0,1.548-1.443,3.938-1.443c2.962,0,5.062,2.144,5.062,6.304V21.5h-5v-7C17.527,13.396,16.632,12.5,15.527,12.5z"/>
+        </g>
+    </svg>
+    </div>
+  </div>
+</a>
+
+<!-- Sharingbutton Reddit -->
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=http://nrupatunga.github.io/2016/05/14/convolution-arithmetic-in-deep-learning-part-1/" target="_blank" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+        <path d="M24,11.5c0-1.654-1.346-3-3-3c-0.964,0-1.863,0.476-2.422,1.241c-1.639-1.006-3.747-1.64-6.064-1.723 c0.064-1.11,0.4-3.049,1.508-3.686c0.72-0.414,1.733-0.249,3.01,0.478C17.189,6.317,18.452,7.5,20,7.5c1.654,0,3-1.346,3-3 s-1.346-3-3-3c-1.382,0-2.536,0.944-2.883,2.217C15.688,3,14.479,2.915,13.521,3.466c-1.642,0.945-1.951,3.477-2.008,4.551 C9.186,8.096,7.067,8.731,5.422,9.741C4.863,8.976,3.964,8.5,3,8.5c-1.654,0-3,1.346-3,3c0,1.319,0.836,2.443,2.047,2.844 C2.019,14.56,2,14.778,2,15c0,3.86,4.486,7,10,7s10-3.14,10-7c0-0.222-0.019-0.441-0.048-0.658C23.148,13.938,24,12.795,24,11.5z  M2.286,13.366C1.522,13.077,1,12.351,1,11.5c0-1.103,0.897-2,2-2c0.635,0,1.217,0.318,1.59,0.816 C3.488,11.17,2.683,12.211,2.286,13.366z M6,13.5c0-1.103,0.897-2,2-2s2,0.897,2,2c0,1.103-0.897,2-2,2S6,14.603,6,13.5z  M15.787,18.314c-1.063,0.612-2.407,0.949-3.787,0.949c-1.387,0-2.737-0.34-3.803-0.958c-0.239-0.139-0.321-0.444-0.182-0.683 c0.139-0.24,0.444-0.322,0.683-0.182c1.828,1.059,4.758,1.062,6.59,0.008c0.239-0.138,0.545-0.055,0.683,0.184 C16.108,17.871,16.026,18.177,15.787,18.314z M16,15.5c-1.103,0-2-0.897-2-2c0-1.103,0.897-2,2-2s2,0.897,2,2 C18,14.603,17.103,15.5,16,15.5z M21.713,13.365c-0.397-1.155-1.201-2.195-2.303-3.048C19.784,9.818,20.366,9.5,21,9.5 c1.103,0,2,0.897,2,2C23,12.335,22.468,13.073,21.713,13.365z"/>
+    </svg>
+    </div>
+  </div>
+</a>
+
+<!-- Sharingbutton E-Mail -->
+<a class="resp-sharing-button__link" href="mailto:?subject=Convolution Arithmetic in Deep Learning: Part-1&amp;body=http://nrupatunga.github.io/2016/05/14/convolution-arithmetic-in-deep-learning-part-1/" target="_self" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+        <path d="M22,4H2C0.897,4,0,4.897,0,6v12c0,1.103,0.897,2,2,2h20c1.103,0,2-0.897,2-2V6C24,4.897,23.103,4,22,4z M7.248,14.434 l-3.5,2C3.67,16.479,3.584,16.5,3.5,16.5c-0.174,0-0.342-0.09-0.435-0.252c-0.137-0.239-0.054-0.545,0.186-0.682l3.5-2 c0.24-0.137,0.545-0.054,0.682,0.186C7.571,13.992,7.488,14.297,7.248,14.434z M12,14.5c-0.094,0-0.189-0.026-0.271-0.08l-8.5-5.5 C2.997,8.77,2.93,8.46,3.081,8.229c0.15-0.23,0.459-0.298,0.691-0.147L12,13.405l8.229-5.324c0.232-0.15,0.542-0.084,0.691,0.147 c0.15,0.232,0.083,0.542-0.148,0.691l-8.5,5.5C12.189,14.474,12.095,14.5,12,14.5z M20.934,16.248 C20.842,16.41,20.673,16.5,20.5,16.5c-0.084,0-0.169-0.021-0.248-0.065l-3.5-2c-0.24-0.137-0.323-0.442-0.186-0.682 s0.443-0.322,0.682-0.186l3.5,2C20.988,15.703,21.071,16.009,20.934,16.248z"/>
+    </svg>
+    </div>
+  </div>
+</a>
+
+
+<hr style="margin-top: 0;">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<script src="/vendor/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<ul id="toc"></ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Convolutional Neural Networks (<a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">CNN</a>) has
+become so popular due to its state of the art results in many computer
+vision tasks such as <em>Image Recognition</em>, <em>Image Classification</em>,
+<em>Semantic Segmentation</em>.</p>
+
+<p>For a beginner in Deep Learning, using CNNs for the first time is
+generally an intimidating experience. Even though it is easier to
+understand the layers of CNNs such as <em>Convolution</em>,
+<em>Pooling</em>, <em>Non Linear Activations</em>, <em>Fully Connected layers</em>,
+<em>Deconvolution</em> when treated individually, its quite difficult to make
+sense of effect of these operations on each layer’s output size, shape
+as the networks gets deeper</p>
+
+<p><a href="http://arxiv.org/pdf/1505.04366v1.pdf">Figure 1.1</a> below shows the
+sample CNN architecture. We can see how the network is stacked up with
+<em>Convolution</em>, <em>Pooling</em>, <em>Deconvolution</em> layers. At the top of each
+layers, you can observe the shape of the output mentioned. How did we
+get those numbers?. This is dependent on the parameters choosen in that layer.
+That’s what we want to understand.</p>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/cnn.jpg" alt="" /></p>
+
+  <p class="image-caption">Figure 1.1: CNN architecture</p>
+
+</div>
+
+<p>I experienced that good understanding of computational mechanism of convolution, pooling and
+deconvolution layers and their dependency on parameters such as <em>kernel size, strides, padding</em>
+together builds a solid ground in understanding CNNs better</p>
+
+<p><strong><em>The main objectives for rest of the post:</em></strong></p>
+
+<ul>
+  <li>To understand the relationship between input shape, kernel shape, zero
+  padding, strides and output shape in convolution, pooling and
+  deconvolution layers</li>
+  <li>To understand the relationship between convolution layers and
+  deconvolution layers</li>
+</ul>
+
+<p>The main building blocks of CNN are <strong><em>Discrete Convolution</em></strong> and
+<strong><em>Pooling</em></strong>.</p>
+
+<h2 id="affine-transformation-and-discrete-convolution">Affine Transformation and Discrete Convolution</h2>
+
+<ul>
+  <li><strong><em>Affine Transformation</em></strong>: A vector is given as an input and is
+  multiplied with a matrix to produce an output. This is the
+  transformation which is most often used in Neural networks. This is
+  applicable to any type of input be it an image, a sound clip:
+  whatever their dimensionality, the representation can always be
+  flattened into a vector before transformation
+    <ul>
+      <li>
+        <p>If you take <a href="http://yann.lecun.com/exdb/mnist/">MNIST</a> digit recognition as an example, the
+   2-D input is flattened to a 1-D vector of size and fed as an input to
+   the typical <a href="http://ufldl.stanford.edu/tutorial/supervised/MultiLayerNeuralNetworks/">fully connected neural network</a> as shown in Figure 1.2</p>
+      </li>
+      <li>But we notice images, sound clips have intrinsic structure. They share following properties
+        <ul>
+          <li>They are stored as multi-dimensional array</li>
+          <li>They feature one or more axes for which ordering
+  matters (e.g., width and height axes of an image,
+  time axis for a sound clip)</li>
+          <li>One axis, called the channel axis is used to access
+  different views of the data (e.g., red, green, and
+  blue channels of a color image, or left and right
+  channels of a stereo audio track)</li>
+        </ul>
+      </li>
+      <li>These properties are not exploited when <em>Affine transformation</em> is applied. All the axes are treated
+    in the same way and topological information is not taken into consideration</li>
+      <li>In computer vision tasks, taking the advantage of implicit structure of the input data can be very handy</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/mnist.png" alt="" /></p>
+
+  <p class="image-caption">Figure 1.2: Multi-layer perceptron</p>
+
+</div>
+
+<ul>
+  <li><strong><em>Discrete Convolution</em></strong>: It is a linear transformation which respects the ordering of the input data that we discussed above
+    <ul>
+      <li>Convolution operation is sparse in CNN, i.e., only a few input units contribute to a
+  given output unit (Figure 1.3 (a))</li>
+      <li>It reuses the parameters i.e., same weights are applied to
+  multiple locations (Figure 1.3 (b))</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/localconnectivity_sharedweights.png" alt="" /></p>
+
+  <p class="image-caption">Figure 1.3: (a) Local connectivity (b) Shared weights</p>
+
+</div>
+
+<h2 id="discrete-convolution-in-detail">Discrete Convolution in detail</h2>
+<ul>
+  <li>Figure 1.4 shows an example of a discrete convolution. The light blue
+  grid is called the <strong><em>input feature map</em></strong> and the shaded area is the
+  <strong><em>kernel</em></strong> (<em>kernel values are at right bottom of each cell in shaded area</em>)</li>
+</ul>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/convolution-2.1.png" alt="" /></p>
+
+  <p class="image-caption">Figure 1.4: Computing the output values of a discrete convolution</p>
+
+</div>
+
+<ul>
+  <li>At each location, the product between the each element of the kernel
+  and the input elements which overlaps is computed and results are
+  summed up to obtain the output in the current location. The green
+  grid in the figure illustrates this, shaded area in the green grid
+  indicates output at that current location</li>
+  <li>The convolution operation shown in the Figure 1.4 is an instance of
+  2-D convolution, but this can be generalized to N-D convolution.
+  For instance, in a 3-D convolution, the kernel would be a
+  <em>cuboid</em> and would slide across the height, width and the depth of
+  the input.</li>
+  <li>In CNN, the collection of kernels defining a discrete convolution has a shape
+  corresponding to some permutation of (\(n, m, k_j\)),
+  where
+  <script type="math/tex">n \equiv number\  of\ output\ feature\ maps</script>
+  <script type="math/tex">m \equiv number\  of\ input\ feature\ maps</script>
+  <script type="math/tex">k\_j \equiv kernel\  size\ along\ axis\ j \ (\ width \ or \ height \ axis\ )</script></li>
+  <li>
+    <p>The following properties affect the output size \(o_j\) of a
+  convolution layer along the axis \(j\)
+  <script type="math/tex">i\_j : input\  size\ along\ axis\ j</script>
+  <script type="math/tex">k\_j : kernel\  size\ along\ axis\ j</script>
+  <script type="math/tex">s\_j : stride\  along\ axis\ j</script>
+  <script type="math/tex">p\_j : zero\  padding\ along\ axis\ j</script></p>
+  </li>
+  <li>For instance Figure 1.5 shows a \(3*3\) kernel applied to
+  \(5*5\) input padded with \(1*1\) border of zeros using \(2*2\)
+  strides</li>
+</ul>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/convolution-2.2.png" alt="" /></p>
+
+  <p class="image-caption">Figure 1.5: Computing the output values of a discrete convolution for
+	  \(N=2\)  \(i_1 = i_2 = 5\),  \(k_1 = k_2 = 3\) ,  \(s_1 = s_2 = 2\),  \(p_1 = p_2 = 1\)</p>
+
+</div>
+
+<ul>
+  <li>The strides constitute a form of <strong><em>subsampling</em></strong>. Strides can be
+  viewed as much of the output is retained.  For instance, moving the
+  kernel by hops of two is equivalent to moving the kernel by hops
+  of one, but retain only odd output elements (Figure 1.6)</li>
+</ul>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/convolution-2.3.png" alt="" /></p>
+
+  <p class="image-caption">Figure 1.6: An alternative way of viewing strides. Instead of
+translating the \(3*3\) kernel by increments of \(s=2\) (left), the kernel is translated by increments of \(1\) and only odd numbered output elements are retained</p>
+
+</div>
+
+<h2 id="convolutional-arithmetic">Convolutional Arithmetic</h2>
+<p>The analysis of relationship between convolutional layer properties is
+eased by the fact that they don’t interact across axes, i.e., the choice
+of kernel size, stride and zero padding along the axis \(j\) only affects
+the output size along the axis \(j\)</p>
+
+<p>The following simplified settings are used to analyse the convolution
+layer properties</p>
+
+<ul>
+  <li>\(2\)-\(D\) discrete convolutions (\(N = 2\))</li>
+  <li>square inputs (\(i_1 = i_2 = i\))</li>
+  <li>square kernel size (\(k_1 = k_2 = k\))</li>
+  <li>same strides along both axes (\(s_1 = s_2 = s\))</li>
+  <li>same zero padding along both axes (\(p_1 = p_2 = p\))</li>
+</ul>
+
+<h3 id="no-zero-padding-unit-strides">No Zero Padding, Unit Strides</h3>
+<p>The simplest case to analyse is when the kernel just slides across every position of the input (i.e., \(s = 1\) and \(p = 0\))</p>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/no_padding_no_strides.png" alt="" /></p>
+
+  <p class="image-caption">Figure 1.7: No Padding, Unit Strides</p>
+
+</div>
+
+<p>Lets define the output size resulting from this setting</p>
+
+<ul>
+  <li>The output size is the number of possible placements of the
+  kernel on the input</li>
+  <li>Lets consider the width axis: the kernel starts on the
+  leftmost part of the input feature map and slides by steps
+  of one until it touches the right side of the input</li>
+  <li>The size of the output will be equal to number of steps made,
+  plus one</li>
+</ul>
+
+<p><strong>Relationship-1</strong>: <em>For any \(i\), \(k\), and for \(s=1\) and \(p=0\),</em></p>
+
+<script type="math/tex; mode=display">o = (i-k)+1</script>
+
+<ul>
+  <li>Figure 1.7 provides an example for \(i=4\), \(k = 3\), \(s=1\), therefore output size \(o = (4-3) + 1 = 2\) along each axis</li>
+</ul>
+
+<h3 id="zero-padding-unit-strides">Zero Padding, Unit Strides</h3>
+<p>Lets consider zero padding only restricting stride \(s = 1\). The effect of
+zero padding increases the size of the input from \(i\) to \(i+2p\)</p>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/arbitrary_padding_no_strides.PNG" alt="" /></p>
+
+  <p class="image-caption">Figure 1.8: Zero Padding, Unit Strides</p>
+
+</div>
+
+<p><strong>Relationship-2</strong>: <em>For any \(i\), \(k\), \(p\) and for \(s=1\),</em>
+<script type="math/tex">o = (i-k)+ 2p + 1</script></p>
+
+<ul>
+  <li>Figure 1.8  provides an example for \(i = 5\), \(k = 4\) and \(p = 2\),
+  therefore output size \(o = (5-4) + 2*2 + 1 = 6\).</li>
+</ul>
+
+<h3 id="half-padding">Half padding</h3>
+<p>Some times we require the output size of convolution to be same as input
+size (i.e., \(o=i\)). In order for \(o=i\), we use \(p = \lfloor \dfrac{k}{2} \rfloor\)</p>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/same_padding_no_strides.PNG" alt="" /></p>
+
+  <p class="image-caption">Figure 1.9: Half Padding, Unit Strides</p>
+
+</div>
+
+<p><strong>Relationship-3</strong>: For any \(i\), and for odd \(k\) (\(k = 2n + 1\), \(n \in N\)), \(s=1\), and \(p = \lfloor \dfrac{k}{2} \rfloor = n\)
+<script type="math/tex">o = (i+2\lfloor \dfrac{k}{2} \rfloor)-(k - 1)</script>
+<script type="math/tex">o = (i + 2n - 2n)</script>
+<script type="math/tex">o = i</script></p>
+
+<ul>
+  <li>Figure 1.9  provides an example for \(i = 5\), \(k = 3\) hence \(p = 2\),
+  therefore output size \(o = (5+2*\lfloor \dfrac{3}{2} \rfloor) - (3 - 1) = 5 + 2 * 1 - 2 = 5\).</li>
+</ul>
+
+<h3 id="full-padding">Full padding</h3>
+<p>Some times we require the output size of convolution to be of larger size than as input. But, convolution always decreases
+the size of the output if there is no extra padding to the input, so we can do some extra zero padding to the input.</p>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/full_padding_no_strides.PNG" alt="" /></p>
+
+  <p class="image-caption">Figure 1.10: Full Padding, Unit Strides</p>
+
+</div>
+
+<p><strong>Relationship-4</strong>: For any \(i\), and \(k\), \(s=1\), and \(p = k - 1\)
+<script type="math/tex">o = (i + 2(k - 1) - (k - 1)</script>
+<script type="math/tex">o = (i + (k - 1)</script></p>
+
+<ul>
+  <li>Figure 1.10  provides an example for \(i = 5\), \(k = 3\) hence \(p = 2\),
+  therefore output size \(o = 5 + 3 - 1 = 7\).</li>
+</ul>
+
+<h3 id="no-zero-padding-non-unit-strides">No zero padding, non-unit strides</h3>
+<p>All relationships which we saw till now are unit-strided convolutions. In order to understand the effect of non-unit strides,
+lets ignore padding for now.</p>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/no_padding_strides.PNG" alt="" /></p>
+
+  <p class="image-caption">Figure 1.11: No zero padding, non-unit Strides</p>
+
+</div>
+
+<ul>
+  <li>As we discussed before, output size can be defined in terms of the number of possible placements of the kernel on the input.
+If you consider only width axis, the size of the output is equal to the number of steps made, plus one, accounting for the initial position of the kernel.
+The same logic applies for height axis.</li>
+</ul>
+
+<p><strong>Relationship-5</strong>: For any \(i\), \(k\), \(s\), and  for \(p = 0\)
+<script type="math/tex">o = \lfloor \dfrac{i - k}{s} \rfloor + 1</script></p>
+
+<ul>
+  <li>
+    <p>Figure 1.11  provides an example for \(i = 5\), \(k = 3\), \(p = 0\) and \(s = 2\),
+  therefore output size \(o = \lfloor \dfrac{5 - 3}{2} \rfloor + 1 = 2\).</p>
+  </li>
+  <li>
+    <p><strong><em>NOTE</em></strong> : The floor function in relationship-5 accounts for the fact that sometimes input size is such that kernel
+would not be able to reach all the input units.</p>
+  </li>
+  <li>
+    <p>Figure 1.12 illustrates this</p>
+  </li>
+</ul>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/arbitrary_padding_strides.PNG" alt="" /></p>
+
+  <p class="image-caption">Figure 1.12 Arbitrary padding and Strides</p>
+
+</div>
+
+<h3 id="zero-padding-non-unit-strides">Zero padding, non-unit strides</h3>
+<p>This is the more general case, convolving over a zero padded input using a non-unit strides.
+We can derive by applying relationship-5 on effective input size of \(i + 2p\)</p>
+
+<p><strong>Relationship-6</strong>: For any \(i\), \(k\), \(s\), and \(p\)
+<script type="math/tex">o = \lfloor \dfrac{i + 2p - k}{s} \rfloor + 1</script></p>
+
+<div class="image-wrapper">
+
+  <p><img src="/assets/arbitrary_padding_strides-1.PNG" alt="" /></p>
+
+  <p class="image-caption">Figure 1.13 Arbitrary padding and Strides</p>
+
+</div>
+
+<ul>
+  <li>Figure 1.13  provides an example for \(i = 5\), \(k = 3\), \(s = 2\) and \(p = 1\),
+  therefore output size \(o = \lfloor \dfrac{5 + 2*1 - 3}{2} \rfloor + 1 = 5\).</li>
+  <li>Figure 1.12  provides an example for \(i = 6\), \(k = 3\), \(s = 2\) and \(p = 1\),
+  therefore output size \(o = \lfloor \dfrac{6 + 2*1 - 3}{2} \rfloor + 1 = 5\).</li>
+</ul>
+
+<p>Observe that even though both has different size inputs \(i = 5\) and \(i = 6\), output size after convolution is same \(o = 5\) for both.
+As discussed before, this is due to the fact that kernel is not able to reach all the input units.</p>
+
+<p><em>continued in <a href="https://nrupatunga.github.io/convolution-2/">part 2</a></em></p>
+
+<h2 id="references">References</h2>
+<p>[1] <a href="https://arxiv.org/abs/1603.07285">A guide to convolution arithmetic for deep learning</a></p>
+
+
+</div>
+</div>
+</div>
+
+
+  <script src="/js/sp.js"></script>
+  <script src="/vendor/js/jquery.min.js"></script>
+  <script src="/vendor/js/bootstrap.min.js"></script>
+  <script src="/vendor/js/anchor.min.js"></script>
+  <script src="/vendor/js/jquery.toc.js"></script>
+  <script type="text/javascript">
+   try {
+       var snowplowTracker = Snowplow.getTrackerUrl('joule.isr.cs.cmu.edu:8081');
+       snowplowTracker.enableLinkTracking();
+       snowplowTracker.trackPageView();
+   } catch (err) {}
+
+   $("#toc").toc({
+       'headings': 'h2,h3'
+   });
+   anchors.add('h2,h3');
+  </script>
+
+</body>
+
+</html>
