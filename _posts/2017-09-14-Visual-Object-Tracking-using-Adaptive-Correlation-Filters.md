@@ -93,6 +93,11 @@ generates the hanning windows coefficients of size `w, h`. The input
 image signal is modulated with this function in order to reduce the edge
 effects (high frequency). 
 
+|Hanning window |
+|-------------------------|:
+|![](/assets/mosse/images/hanning.jpg)|
+
+
 <sup> NOTE::_To understand the role of Hanning function, you need to understand
 the concept of **DFT leakage**.  In short, when we deal with digital
 signals, if the input signal does not contain frequencies which are
@@ -110,29 +115,30 @@ g = cv2.GaussianBlur(g, (-1, -1), 2.0)
 g /= g.max()
 ```
 Basic idea of the algorithm is to train correlation filter `H*`, when
-convolved with image should give the new location of the target. This filter is
-trained in Fourier domain because its computationally efficient. 
+convolved with current input frame should give the new location of the
+target. This filter is trained in Fourier domain because its
+computationally efficient. 
 
 To train, we need input-groundtruth pair. For each `img`, groundtruth
 `g` is Gaussian shaped peak centered on the target. Above code generates
 normalized Gaussian with variance `2.0` as ground truth `g` for each
 input image `img`
 
----
+|  Ground truth (Gaussian peak) |
+|------------------------- |:
+|![](/assets/mosse/images/gt.jpg) |
+
 ```python
 self.G = cv2.dft(g, flags=cv2.DFT_COMPLEX_OUTPUT)
 ```
 Since we train the filter in Fourier domain, we take the Fourier
 transform of Gaussian generated in the previous step.
 
-#### Output of code block - 2
-
-|Hanning window |  Ground truth (Gaussian peak) |
-|-------------------------|------------------------- |
-|![](/assets/mosse/images/hanning.jpg)|![](/assets/mosse/images/gt.jpg) |
-
-
-#### Code block - 3
+---
+Once we generate the ground truth `g`, now we generate more training
+examples lets call `num_images=128` in order to get good initial
+estimate of `H`, which is done by random warping the
+input image `img` using `cv2.warpAffine`<sup>[doc](http://docs.opencv.org/2.4/modules/core/doc/operations_on_arrays.html#getoptimaldftsize)</sup> function.
 
 ---
 ```python
@@ -145,12 +151,7 @@ self.update_kernel()
 self.update(frame)
 ``` 
 
-Once we generate the ground truth `g`, now we generate more training
-examples lets call `num_images=128` in order to get good initial
-estimate of `H`, which is done by random warping the
-input image `img` using `cv2.warpAffine`<sup>[doc](http://docs.opencv.org/2.4/modules/core/doc/operations_on_arrays.html#getoptimaldftsize)</sup> function.
-
-This function needs `2 x 3` transformation matrix `T`, where top `T[:2, :2]` is `2 x 2`
+`cv2.warpAffine` function needs `2 x 3` transformation matrix `T`, where top `T[:2, :2]` is `2 x 2`
 rotation matrix<sup>[doc](https://www.wikiwand.com/en/Rotation_matrix)</sup> and `T[:, 2]` is `2 x 1` is translation matrix.
 
 ---
@@ -180,6 +181,9 @@ The output of warping is shown below
 
 
 ---
+
+Next step is to preprocess the warped image.
+
 ```python
 def preprocess(self, img):
     img = np.log(np.float32(img)+1.0)
@@ -201,17 +205,18 @@ effect. The output of the above code is shown below
 <sup># images are scaled for display purpose </sup>
 
 ---
+Next step includes implementing the equation
+![](/assets/mosse/images/mosse_eqn.jpg), where `G` is Fourier transform of ground
+truth `g`.
 
 ```python
 self.H1 += cv2.mulSpectrums(self.G, A, 0, conjB=True)
 self.H2 += cv2.mulSpectrums(     A, A, 0, conjB=True)
 ``` 
 
-Next step includes implementing the equation
-![](/assets/mosse/images/mosse_eqn.jpg), where `G` is Fourier transform of ground
-truth `g`. `F` is the Fourier transform of input `a` <sup>(in the code `F=A`)</sup>
+`F` is the Fourier transform of input `a` <sup>(in the code `F=A`)</sup>
 `*` indicates the complex conjugate and `i` indicates the number of
-images, which is `128` in our case
+image, which ranges from  `1 - 128` in our case
 
 `self.H1, self.H2` implements the numerator and denominator part respectively, using the 
 `cv2.mulSpectrums`<sup>[doc](http://docs.opencv.org/2.4/modules/core/doc/operations_on_arrays.html)</sup>.
@@ -237,8 +242,6 @@ def divSpec(A, B):
 As next step, we get the initial estimation of `H*`, by calling
 `self.update_kernel`. This function calls `divSpec` which performs
 element wise division grouping real and imaginary part of the data
-
----
 
 ```python
 self.update(frame)
@@ -275,19 +278,19 @@ def correlate(self, img):
     return resp, (mx-w//2, my-h//2), psr
 ```
 
-So far, we got the estimated the initial `H*`. Once we got `H*`, we
-update the location of target in current frame. This is done by calling
-the function `correlate`.
+So far, we got the initial estimate of `H*`. With this `H*`, we update
+the location of target in current frame. This is done by calling the
+function `correlate`.
 
 `C = cv2.mulSpectrums(cv2.dft(img, flags=cv2.DFT_COMPLEX_OUTPUT), self.H, 0, conjB=True)` correlates the input image with filter. 
 This is done in Fourier domain again. `resp = cv2.idft(C, flags=cv2.DFT_SCALE | cv2.DFT_REAL_OUTPUT)` takes
 the `idft` of the `FFT` output to get the response in spatial domain.
 Then, we find the maximum response and its location using `cv2.minMaxLoc`<sup>[doc](http://docs.opencv.org/2.4/modules/core/doc/operations_on_arrays.html)</sup> in the line `_, mval, _, (mx, my) = cv2.minMaxLoc(resp)`
 
-Next we find **Peak-Sidelobe-Ratio (PSR)**,  which is given by `PSR =
+We then calculate **Peak-Sidelobe-Ratio (PSR)**,  which is given by `PSR =
 (mval - mean_side_lobe) / std_side_lobe`, where `mval` is maximum response.
 The side lobe considered is `11x11` pixel around `(mx, my)`
-`psr = (mval-smean) / (sstd+eps)` calculates the **PSR**.`eps=1e-5` is used for numerical stability.
+`psr = (mval-smean) / (sstd+eps)`. `eps=1e-5` is used for numerical stability.
 If `psr <= 8.0`, then the object is considered to be occluded or
 tracking has failed.
 
@@ -299,6 +302,12 @@ self.H2 = self.H2 * (1.0-rate) + H2 * rate
 self.update_kernel()
 ```
 
-Once we got the location of target for the current frame `self.pos`, we
+Once we got the location `self.pos` of target for the current frame, we
 update our estimate `H*` by calculating `self.H1` and `self.H2` and
-updating the filter with learning rate of `0.125`
+updating the filter with learning rate of `0.125`. This continues for
+each frame where we update the filter and the location of target hand in
+hand.
+
+
+Thats how tracking using correlation filter is done!. Hope you could
+understand the algorithm better. Thank you for reading.
