@@ -202,7 +202,7 @@ effect. The output of the above code is shown below
 |-------------------------|------------------------- |
 |![](/assets/mosse/images/img_bb.jpg)|![](/assets/mosse/images/preprocess_with_han.gif)
 
-<sup># images are scaled for display purpose </sup>
+<sup># image values are normalized between `0-255` for display purpose </sup>
 
 ---
 Next step includes implementing the equation
