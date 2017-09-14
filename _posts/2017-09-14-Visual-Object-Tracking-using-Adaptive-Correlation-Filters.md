@@ -72,6 +72,9 @@ at `x, y` with width `w` and height `h` using
 
 ---
 
+The next step in the algorithm is to generate the groundtruth for each
+input image `img`, and also preprocess the input.
+
 ```python
 self.win = cv2.createHanningWindow((w, h), cv2.CV_32F)
 g = np.zeros((h, w), np.float32)
@@ -80,9 +83,6 @@ g = cv2.GaussianBlur(g, (-1, -1), 2.0)
 g /= g.max()
 self.G = cv2.dft(g, flags=cv2.DFT_COMPLEX_OUTPUT)
 ```
-
-The next step in the algorithm is to generate the groundtruth for each
-input image `img`, and also preprocess the input.
 
 ---
 ```python
