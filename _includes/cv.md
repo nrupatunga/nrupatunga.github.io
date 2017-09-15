@@ -102,6 +102,15 @@ image processing modules.
 ## Projects & Codes
 
 <table class="table table-hover">
+
+    <tr>
+    <td class="col-md-3"><a href='' target='_blank'><img src="images/project_images/pygoturn.gif"/></a> </td>
+    <td>
+    <strong>GOTURN: Generic Object Tracking Using Regression Networks </strong><br>
+    [<a href='https://github.com/nrupatunga/PY-GOTURN' target='_blank'>code</a>] <br>
+    </td>
+    </tr>
+
     <tr>
     <td class="col-md-3"><a href='' target='_blank'><img src="images/project_images/charnn.jpeg"/></a> </td>
     <td>
@@ -110,8 +119,8 @@ image processing modules.
     [<a href='https://github.com/nrupatunga/char-RNN-LSTM' target='_blank'>code-lstm</a>] <br>
     </td>
     </tr>
-    <tr>
 
+    <tr>
     <td class="col-md-3"><a href='' target='_blank'><img src="images/project_images/pedestriandetection.PNG"/></a> </td>
     <td>
     <strong>Pedestrian Detection using Histogram of Oriented Gradients (HOG)</strong><br>
