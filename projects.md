@@ -52,6 +52,8 @@ Observe how images are clustered.
 </td> </tr>
 <br>
 
+---
+
 ## Global Image Descriptor - GIST
 GIST is the low dimensional representation of an Image. It encodes the
 structural information of the image by dividing the image into blocks,
@@ -81,6 +83,7 @@ Thus GIST features helps in the task of Nearest Neighbor Image retrieval
 </tr>
 <br>
 
+---
 
 ## Pencil Sketch
 This is the implementation of the algorithm in this [paper](http://www.cse.cuhk.edu.hk/~leojia/projects/pencilsketch/npar12_pencil.pdf).
@@ -108,6 +111,8 @@ and sketch structure.
 
 <sup>_**Note:**_ _Software does not include color pencil sketch for now!_
 
+---
+
 ## Image Processing Toolbox
 This is a GUI application developed using OpenCV and Qt. This
 application can be used to experiment the following functionalities.
@@ -133,6 +138,8 @@ application can be used to experiment the following functionalities.
 </tr>
 <br>
 
+---
+
 ##  Bilateral Filtering
 A [bilateral filter](http://people.csail.mit.edu/sparis/bf_course/) is a non-linear, edge-preserving and noise-reducing smoothing filter for images.
 
@@ -142,6 +149,8 @@ A [bilateral filter](http://people.csail.mit.edu/sparis/bf_course/) is a non-lin
 [<a href='https://github.com/nrupatunga/Bilateral-Filter' target='_blank'>C++</a>]
 </td> </tr>
 <br>
+
+---
 
 ## Canny Edge Detector
 The [Canny edge detector](http://docs.opencv.org/3.1.0/da/d22/tutorial_py_canny.html#gsc.tab=0) is an edge detection
@@ -153,6 +162,8 @@ operator that uses a multi-stage algorithm to detect a wide range of edges in im
 [<a href='https://github.com/nrupatunga/Canny-Edge-Detector' target='_blank'>C++</a>]
 </td> </tr>
 <br>
+
+---
 
 ## Python Learning
 I have been coding in Python for a while. You can find a very good
