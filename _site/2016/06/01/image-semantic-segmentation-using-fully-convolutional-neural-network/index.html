@@ -180,9 +180,13 @@ MathJax.Hub.Config({
 
 <ul id="toc"></ul>
 
+<hr />
+
 <h2 id="introduction">Introduction</h2>
 <p>In this post, I will try to give a quick theoretical background to Fully Convolutional neural Network (FCN)
 and give a little hands on understanding FCN. Basic knowledge of neural network and convolutional network is assumed.</p>
+
+<hr />
 
 <h2 id="fully-connected-neural-network">Fully Connected Neural Network</h2>
 
@@ -216,6 +220,8 @@ before it is fed to the input layer. Outputs will also be 1-D vector. This is il
 optimization methods such as <em>Gradient Descent</em> and <em>Stochastic Gradient Descent</em> algorithm.</p>
   </li>
 </ul>
+
+<hr />
 
 <h2 id="convolutional-neural-network-cnn">Convolutional Neural Network (CNN)</h2>
 
@@ -271,6 +277,8 @@ as seen in regular Neural Networks.</li>
 
 </div>
 
+<hr />
+
 <h1 id="fully-convolutional-neural-network-fcn">Fully Convolutional Neural Network (FCN)</h1>
 <p>Fully Convolutional Neural Network is nothing but CNN, except that final
 FC layer(s) in CNN are converted to convolution layers, as simple as that. Figure 1.3 illustrates this.</p>
@@ -291,12 +299,16 @@ case of Image Segmentation</li>
 <p>Let us get a quick hands on how to convert a CNN to FCN using <a href="http://caffe.berkeleyvision.org/">Caffe</a> tool.
 Caffe is a Deep learning framework by the <a href="http://bvlc.eecs.berkeley.edu/">BVLC</a></p>
 
+<hr />
+
 <h2 id="hands-on---transforming-cnn-to-fcn">Hands on - Transforming CNN to FCN</h2>
 <ul>
   <li>Let’s take the standard Caffe Reference ImageNet model <strong><em>CaffeNet</em></strong> and transform it into a fully convolutional
 net for efficient, dense inference. The code is extracted from the cafee <a href="https://github.com/BVLC/caffe/blob/master/examples/net_surgery.ipynb">net surgery</a> example
 Please refer to this <a href="https://nrupatunga.github.io/netsurgery/">post</a> for step by step explanation</li>
 </ul>
+
+<hr />
 
 <h1 id="references">References</h1>
 <p><a name="Lend"></a>

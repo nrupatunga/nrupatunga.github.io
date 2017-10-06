@@ -13,9 +13,13 @@ MathJax.Hub.Config({
 
 <ul id="toc"></ul>
 
+---
+
 ## Introduction
 In this post, I will try to give a quick theoretical background to Fully Convolutional neural Network (FCN)
 and give a little hands on understanding FCN. Basic knowledge of neural network and convolutional network is assumed.
+
+---
 
 ## Fully Connected Neural Network
 
@@ -36,6 +40,7 @@ before it is fed to the input layer. Outputs will also be 1-D vector. This is il
 * We learn the weights \\(W^i\\), by backpropogating the errors through intermediate layers in conjunction with
 optimization methods such as _Gradient Descent_ and _Stochastic Gradient Descent_ algorithm.
 
+---
 
 ## Convolutional Neural Network (CNN)
 
@@ -68,6 +73,8 @@ Neurons in a fully connected layer have full connections to all activations in t
 as seen in regular Neural Networks.
 {% include image.html img="/assets/fcn-seg/conv-net.png" caption="Figure 1.3: Fully connected layers in CNN" %}
 
+---
+
 # Fully Convolutional Neural Network (FCN)
 Fully Convolutional Neural Network is nothing but CNN, except that final
 FC layer(s) in CNN are converted to convolution layers, as simple as that. Figure 1.3 illustrates this.
@@ -79,11 +86,14 @@ case of Image Segmentation
 Let us get a quick hands on how to convert a CNN to FCN using [Caffe](http://caffe.berkeleyvision.org/) tool.
 Caffe is a Deep learning framework by the [BVLC](http://bvlc.eecs.berkeley.edu/)
 
+---
+
 ## Hands on - Transforming CNN to FCN
 * Let's take the standard Caffe Reference ImageNet model **_CaffeNet_** and transform it into a fully convolutional
 net for efficient, dense inference. The code is extracted from the cafee [net surgery](https://github.com/BVLC/caffe/blob/master/examples/net_surgery.ipynb) example
 Please refer to this [post](https://nrupatunga.github.io/netsurgery/) for step by step explanation
 
+---
 
 # References
 <a name="Lend"></a>
