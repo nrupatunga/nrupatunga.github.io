@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+  {% if site.google_analytics and jekyll.environment == 'production' %} 
+	{% include analytics.html %}
+  {% endif %}
   <meta charset="utf-8">
   <title>{{ page.title }}</title>
 

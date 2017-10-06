@@ -11,6 +11,7 @@ kramdown:
   syntax_highlighter: rouge
 permalink: pretty
 #paginate: 5
+google_analytics: UA-107715197-1
 gems:
   - jekyll-sitemap
 
