@@ -18,8 +18,12 @@ object, frame to frame by constantly updating the correlation filter
 trained on example images and using the trained filter to update the
 location of the target in current frame
 
+Few important aspects of this algorithm is that, it performs well under
+changes in rotation, scale, lighting and partial occlusion of the
+target object despite its simplicity.
+
 We go through the code available in the
-**[link](https://github.com/opencv/opencv/blob/master/samples/python/mosse.py)**
+[link](https://github.com/opencv/opencv/blob/master/samples/python/mosse.py)
 and understand the implementation. Glancing through the code, I found
 that good place to start is by understanding **`MOSSE`** class
 
