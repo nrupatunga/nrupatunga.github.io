@@ -16,7 +16,8 @@ MathJax.Hub.Config({
 The main idea of the paper is to model the appearance of the target
 object, frame to frame by constantly updating the correlation filter
 trained on example images and using the trained filter to update the
-location of the target in current frame
+location of the target in current frame. Correlation filter is trained
+in Fourier domain which makes it computationally efficient. 
 
 Few important aspects of this algorithm is that, it performs well under
 changes in rotation, scale, lighting and partial occlusion of the
