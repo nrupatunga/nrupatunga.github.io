@@ -9,6 +9,69 @@
       type="application/rss+xml" />
     
     <item>
+      <title>Exploiting the Circulant Structure of Tracking-by-detection with Kernels</title>
+      <description>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}
+});
+&lt;/script&gt;
+
+&lt;script src=&quot;/vendor/MathJax/MathJax.js?config=TeX-AMS_HTML&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;WARNING&lt;/strong&gt;: THIS POST IS UNDER CONSTRUCTION, WILL BE UPDATED SOON&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TIP&lt;/strong&gt;: Please read the &lt;a href=&quot;http://www.robots.ox.ac.uk/~joao/publications/henriques_eccv2012.pdf&quot;&gt;paper&lt;/a&gt; once and use the following notes to understand the algorithm better&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In this paper the author showed how dense sampling of targets can be
+incorporated to improve the performance of classifier, which was
+previously trained by taking few samples around the target&lt;sup&gt;[1,2,3]&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;image-wrapper&quot;&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/assets/csk/images/sampling.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+  &lt;p class=&quot;image-caption&quot;&gt;Figure 1.1: Sampling Strategies (a) Sparse Sampling (b) Dense Sampling&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;While dense sampling can increase the number of samples for the
+training, authors discovered how this type of sampling leads to
+pattern in the samples, which they call it as &lt;strong&gt;circulant structure&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It is shown how this &lt;strong&gt;circulant structure&lt;/strong&gt; can take advantage of
+&lt;strong&gt;Fast Fourier Transform&lt;/strong&gt; (&lt;strong&gt;FFT&lt;/strong&gt;) to train the classifier in one shot
+without the need to reiterate over individual samples.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It is also shown how &lt;strong&gt;circulant structure&lt;/strong&gt; leads to
+mathematical formulation that helps to train the classifier by
+transforming the samples from input space to feature space using
+kernel trick and still run faster.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We go through the matlab code available in the
+&lt;a href=&quot;http://www.robots.ox.ac.uk/~joao/circulant/tracker_release.zip&quot;&gt;link&lt;/a&gt;
+and understand the implementation.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;p&gt;[1] &lt;a href=&quot;http://ieeexplore.ieee.org/abstract/document/5674053/&quot;&gt;Robust object tracking with online multiple instance learning&lt;/a&gt;&lt;br /&gt;
+[2] &lt;a href=&quot;http://ieeexplore.ieee.org/abstract/document/1307012/&quot;&gt;Support vector tracking&lt;/a&gt;&lt;br /&gt;
+[3] &lt;a href=&quot;https://dl.acm.org/citation.cfm?id=1478414&quot;&gt;Semi-supervised on-line boosting for robust tracking&lt;/a&gt;&lt;/p&gt;
+</description>
+      <pubDate>
+        Fri, 13 Oct 2017 00:00:00 +0530
+      </pubDate>
+      <link>http://nrupatunga.github.io/2017/10/13/Exploiting-the-circulant-Structure-of-Tracking-by-detection-with-Kernels/</link>
+      <guid isPermaLink="true">http://nrupatunga.github.io/2017/10/13/Exploiting-the-circulant-Structure-of-Tracking-by-detection-with-Kernels/</guid>
+    </item>
+    
+    <item>
       <title>Visual Object Tracking using Adaptive Correlation Filters</title>
       <description>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
 MathJax.Hub.Config({
@@ -23,10 +86,15 @@ MathJax.Hub.Config({
 &lt;p&gt;The main idea of the paper is to model the appearance of the target
 object, frame to frame by constantly updating the correlation filter
 trained on example images and using the trained filter to update the
-location of the target in current frame&lt;/p&gt;
+location of the target in current frame. Correlation filter is trained
+in Fourier domain which makes it computationally efficient.&lt;/p&gt;
+
+&lt;p&gt;Few important aspects of this algorithm is that, it performs well under
+changes in rotation, scale, lighting and partial occlusion of the
+target object despite its simplicity.&lt;/p&gt;
 
 &lt;p&gt;We go through the code available in the
-&lt;strong&gt;&lt;a href=&quot;https://github.com/opencv/opencv/blob/master/samples/python/mosse.py&quot;&gt;link&lt;/a&gt;&lt;/strong&gt;
+&lt;a href=&quot;https://github.com/opencv/opencv/blob/master/samples/python/mosse.py&quot;&gt;link&lt;/a&gt;
 and understand the implementation. Glancing through the code, I found
 that good place to start is by understanding &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MOSSE&lt;/code&gt;&lt;/strong&gt; class&lt;/p&gt;
 
