@@ -5,7 +5,7 @@ My current research is focussed on applying Deep Learning to Visual
 Recognition problems and also improving different components
 of Visual SLAM (Simultaneous Localization And Mapping) algorithm by
 adding semantic information of the Scene to enhance user experience in
-AR applications
+AR applications.
 <br>
 Previously, I have worked on developing deep learning models for
 classification, recognition and segmentation problems. I was also
