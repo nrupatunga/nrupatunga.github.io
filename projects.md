@@ -69,7 +69,9 @@ visualization using the [code](http://cs.stanford.edu/people/karpathy/cnnembed/)
 
 {% include image.html img="./gist/t-sne/gist-nn-small.png" caption="t-SNE visualization" %}
 Please [download](./gist/t-sne/gist-nn-large.png) and zoom into different parts of the image and see how similar images are clustered together.
-Thus GIST features helps in the task of Nearest Neighbor Image retrieval
+Using GIST features of images, we can retrieve the nearest image using KNN or train
+K-means to generate clusters for similar images. One of the application
+could be to find duplicate images in the Gallery.
 
 <tr>
 <td>
