@@ -6,7 +6,7 @@ Recognition problems and also improving different components
 of Visual SLAM (Simultaneous Localization And Mapping) algorithm by
 adding semantic information of the Scene to enhance user experience in
 AR applications
-
+<br>
 Previously, I have worked on developing deep learning models for
 classification, recognition and segmentation problems. I was also
 involved in design and development of image processing & computer vision
