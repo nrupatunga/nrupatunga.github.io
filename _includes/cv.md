@@ -1,24 +1,34 @@
 ## My Interests
 <table class="table table-hover">
 <td class='col-md-3'>
-My current research is focussed on applying Deep Learning to Visual
-Recognition problems and also improving different components
-of Visual SLAM (Simultaneous Localization And Mapping) algorithm by
-adding semantic information of the Scene to enhance user experience in
-AR applications.
+My current research is focussed on applying Deep Learning to object detection and recognition problems
+while designing small or optimized models to run on mobile devices. 
+
+
 <br>
 Previously, I have worked on developing deep learning models for
 classification, recognition and segmentation problems. I was also
 involved in design and development of image processing & computer vision
 algorithms with hands on C-level and multi-threaded optimisation of
 image processing modules.
+<br/>
+
 </td>
 </table>
 
 ## Industry Experience
 <table class="table table-hover"> 
 <tr>
-  <td class='col-md-3'>2017 - Present</td>
+  <td class='col-md-3'>2019 - Present</td>
+  <td>
+    <strong>Software Engineer, BYJU'S</strong>
+    <br>
+    Product Development Team
+  </td>
+</tr>
+
+<tr>
+  <td class='col-md-3'>2017 - 2019</td>
   <td>
     <strong>Deep Learning Research Engineer, Whodat<sup>TM</sup></strong>
     <br>
