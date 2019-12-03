@@ -21,7 +21,7 @@ image processing modules.
 <tr>
   <td class='col-md-3'>2019 - Present</td>
   <td>
-    <strong>Software Engineer, BYJU'S</strong>
+    <strong>Research Engineer, BYJU'S</strong>
     <br>
     Product Development Team
   </td>
