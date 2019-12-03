@@ -23,7 +23,7 @@ image processing modules.
   <td>
     <strong>Research Engineer, BYJU'S</strong>
     <br>
-    Product Development Team
+    K3 Product Development Team
   </td>
 </tr>
 
