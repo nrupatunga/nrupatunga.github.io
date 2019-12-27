@@ -13,13 +13,6 @@ MathJax.Hub.Config({
 
 **TIP**: Please read the [paper](http://www.cs.colostate.edu/~draper/papers/bolme_cvpr10.pdf) once and use the following notes to understand the algorithm better
 
----
-**Summary of the paper:**
-
-{% include image.html img="/assets/mosse/images/MOSSE.png" caption="Summary of the method" %}
-
----
-
 The main idea of the paper is to model the appearance of the target
 object, frame to frame by constantly updating the correlation filter
 trained on example images and using the trained filter to update the
@@ -323,3 +316,10 @@ hand.
 
 Thats how tracking using correlation filter is done!. Hope you could
 understand the algorithm better. Thank you for reading.
+
+---
+**Summary of the paper:**
+
+{% include image.html img="/assets/mosse/images/MOSSE.png" caption="Summary of the method" %}
+
+---
