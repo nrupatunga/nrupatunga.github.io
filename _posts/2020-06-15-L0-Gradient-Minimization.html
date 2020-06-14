@@ -1,0 +1,248 @@
+     <meta charset="utf-8" lang="en"><style class="fallback">body{visibility:hidden;}</style>
+
+			  **Image Smoothing using L<sub>0</sub> Gradient Minimization**
+
+**TIP**: Please read the [paper](http://www.cse.cuhk.edu.hk/~leojia/papers/L0smooth_Siggraph_Asia2011.pdf) once and use the following notes to understand the algorithm better
+
+![](/assets/smoothing/images/example.png width="450px")
+
+# Overview
+
+In this post, I try to introduce the concepts of **Image smoothing using
+L<sub>0</sub> gradient minimization** and describes different parts of its
+implementation in Python
+
+
+# Definition
+
+_**What is L<sub>0</sub> gradient minimization**_?
+
+Minimization of number of non-zero gradients while preserving the structural
+information in the image. Reducing the number of non-zero gradients in the
+image results in image smoothing and hence the name.
+
+In simple terms, we are basically preserving the strong edges and supressing
+the weaker ones but global structural information of the image is preserved.
+
+Figure [algo] should give you an pictorial idea of what the algorithm does.
+
+![Figure [algo]: Single row of image data and (red) result of
+gradient minimization](/assets/smoothing/images/algo.jpg width="400px")
+
+# Algorithm
+
+I will try to introduce some of the basic concepts needed to understand the algorithm.
+Math here is not hard, stick around it will get clear.
+
+**L<sub>0</sub> norm of gradient**
+---
+Number of pixels with non-zero gradient. Its simple, take an image, take its
+gradient, count the number of pixels with non-zero gradient values.
+
+$$c(f)=\#\left\{p | |f_{p}-f_{p+1}| \neq 0\right\}$$
+
+$|f_{p}-f_{p+1}|$ - gradient at pixel $p$
+
+$#$ - it is the notation for the count
+
+**1D-Smoothing formulation**
+---
+
+So now that we know what L<sub>0</sub> norm of the gradient means, we define
+a objective function we are going to solve for 1D-smoothing. When I say 1D
+you can imagine one row of data in image like in Figure [algo].
+
+The 1D-smoothing objective function is
+
+$$\min _{f} \sum_{p}\left(f_{p}-g_{p}\right)^{2} \text { s.t. } c(f)=k$$
+
+$f_{p}$ - Smoothened image
+
+$g_{p}$ - Actual input image
+
+$(f_{p}-g_{p})^{2}$ - constraint to preserve the global structure of the
+image, while we try to smoothen the image by reducing the number of edges in
+the image with the constrain $c(f)=k$
+
+**2D-Smoothing formulation**
+---
+
+Similar to 1D-smoothing we define object function for 2D image smoothing.
+
+Let $I$: input image, $S$: smoothened image,
+$\nabla S_{p}=\left(\partial_{x} S_{p}, \partial_{y} S_{p}\right)^{T}$: gradient at pixel $p$
+
+Number of non-zero gradients is defined by:
+$$C(S)=\#\left\{p|| \partial_{x} S_{p}|+| \partial_{y} S_{p} | \neq 0\right\}$$
+
+Objective function:
+$$\min _{S}\left\{\sum_{p}\left(S_{p}-I_{p}\right)^{2}+\lambda \cdot C(S)\right\}$$
+
+The term $\sum(S-I)^{2}$ constrains image structural similarity and $\lambda$
+is parameter that control the smoothing.
+
+**Summary**
+---
+
+In summary, the objective function minimizes the number of non-zero gradients in
+the image, while trying to preserve the overall structural information of the
+image. So now we need to see how to solve this equation that could lead us to
+the equation that we could implement using Python.
+
+We need to find a solver for the objective function in equation below:
+
+\begin{equation}\min _{S}\left\{\sum_{p}\left(S_{p}-I_{p}\right)^{2}+\lambda
+\cdot C(S)\right\}\end{equation}
+
+# Solver
+
+Eq (1) involves two terms:
+
+1. $\sum_{p}\left(S_{p}-I_{p}\right)^{2}$: Quadratic and differentiable
+2. $C(S)$: Non-differentiable
+
+Since the second term is not differentiable, we cannot solve this equation using 
+conventional gradient descent optimization method.
+
+The paper talks about something called **Half-quadratic splitting**. Don't be
+intimidated by the name. Basically what they are trying to do is to separate
+the two terms by introducing extra variables in the objective function and
+try to optimize for them individually.
+
+**Modified Objective Function**
+
+After introducing the auxiliary variables, Eq. (1) is modified as:
+
+\begin{equation}\label{aux}\min _{S, h,
+v}\left\{\sum_{p}\left(S_{p}-I_{p}\right)^{2}+\lambda C(h,
+v)+\beta\left(\left(\partial_{x} S_{p}-h_{p}\right)^{2}+\left(\partial_{y}
+S_{p}-v_{p}\right)^{2}\right)\right\}\end{equation}
+
+where $C(h, v)=\#\left\{p|| h_{p}|+| v_{p} | \neq 0\right\}$ and $\beta$ is a
+parameter to control the similarity between variables $(h, v)$ and their
+corresponding gradient. (h, v) are the horizontal and vertical gradients of
+Smoothened image $S$.
+
+The first question that came to my mind is that how do we know $(h, v)$,
+while we are trying to estimate $S$. That's the trick. Here we impose a prior
+on $(h, v)$. We get the information what $(h, v)$ should be by solving for
+$(h, v)$ in Eq. [hv]
+
+Eq. [aux] is optimized for $S$ and $(h, v)$ individually, leading to
+following two objectives.
+
+* **Computing S** : 
+
+\begin{equation}\label{S}\left\{\sum_{p}\left(S_{p}-I_{p}\right)^{2}+\beta\left(\left(\partial_{x}
+S_{p}-h_{p}\right)^{2}+\left(\partial_{y}
+S_{p}-v_{p}\right)^{2}\right)\right\}\end{equation}
+
+In Eq. [S], you can see this objective only contains parameters involving $S$.
+In order to solve for $S$, we need to know $(h, v)$, which we can get by
+solving the second subproblem below.
+
+* **Computing (h, v) ** : 
+
+\begin{equation}\label{hv}\left.\min _{h, v}\left\{\sum_{p}\left(\partial_{x}
+S_{p}-h_{p}\right)^{2}+\left(\partial_{y}
+S_{p}-v_{p}\right)^{2}\right)+\frac{\lambda}{\beta} C(h,
+v)\right\}\end{equation}
+
+where $C(h, v)$ is number of non-zero elements in $|h| + |v|$.
+
+The minimum of Eq. [hv] is achieved under the condition below. (Please refer
+to Page-4 of the paper for the proof)
+
+$$\left(h_{p}, v_{p}\right)=\left\{\begin{array}{ll} (0,0) &
+0left(\partial_{x} S_{p}\right)^{2}+\left(\partial_{y} S_{p}\right)^{2} \leq
+\lambda / \beta \\ \left(\partial_{x} S_{p}, \partial_{y} S_{p}\right) &
+\text { otherwise } \end{array}\right.$$
+
+Using this $(h, v)$, we estimate $S$, which leads to the final solution below:
+
+\begin{equation}\label{solution}S=\mathscr{F}^{-1}\left(\frac{\mathscr{F}(I)+\beta\left(\mathscr{F}\left(\partial_{x}\right)^{*}
+\mathscr{F}(h)+\mathscr{F}\left(\partial_{y}\right)^{*}
+\mathscr{F}(v)\right)}{\mathscr{F}(1)+\beta\left(\mathscr{F}\left(\partial_{x}\right)^{*}
+\mathscr{F}\left(\partial_{x}\right)+\mathscr{F}\left(\partial_{y}\right)^{*}
+\mathscr{F}\left(\partial_{y}\right)\right)}\right)\end{equation}
+
+# Implementation
+
+Basically we are implementing below equation from the
+[paper](http://www.cse.cuhk.edu.hk/~leojia/papers/L0smooth_Siggraph_Asia2011.pdf):
+
+
+$$S=\mathscr{F}^{-1}\left(\frac{\mathscr{F}(I)+\beta\left(\mathscr{F}\left(\partial_{x}\right)^{*}
+\mathscr{F}(h)+\mathscr{F}\left(\partial_{y}\right)^{*}
+\mathscr{F}(v)\right)}{\mathscr{F}(1)+\beta\left(\mathscr{F}\left(\partial_{x}\right)^{*}
+\mathscr{F}\left(\partial_{x}\right)+\mathscr{F}\left(\partial_{y}\right)^{*}
+\mathscr{F}\left(\partial_{y}\right)\right)}\right)$$
+
+$\mathscr{F}$: Fourier transform, $\partial_{x}$: gradient in x-direction,
+$\partial_{y}$: gradient in y-direction. $I$: Input $S$: output image
+
+$$\left(h_{p}, v_{p}\right)=\left\{\begin{array}{ll} (0,0) &
+\left(\partial_{x} S_{p}\right)^{2}+\left(\partial_{y} S_{p}\right)^{2} \leq
+\lambda / \beta \\ \left(\partial_{x} S_{p}, \partial_{y} S_{p}\right) &
+\text { otherwise } \end{array}\right.$$
+
+Brief understanding: 
+- First from the input image, take the horizontal and vertical gradient of the image.
+
+- Then we have some edges (some with strong gradients, some with medium gradients, some with weak gradients).
+
+- Now, we threshold some of these gradients to zero them out using the condition $\left(\partial_{x} S_{p}\right)^{2}+\left(\partial_{y} S_{p}\right)^{2} \leq \lambda / \beta$. $\lambda$ and $\beta$ are the hyperparameters.
+
+- Intuitively, this means that, we want the output $S$ to have the new set of gradients after applying this condition.
+
+- This is nothing but we are reducing the number of edges in the output image $S$ that are not strong. $h_{p}$ and $v_{p}$ is what we find.
+
+Before implementing the algorithm, I went through the theory in Gonzalez Digital Image Processing book, chapter-4.
+This is really a great intro to Fourier Transform properties.
+
+psf2otf
+----------------------------------------------------------------------------------------
+
+In the Python implementation, you might want to understand the details of psf2otf function.
+This section explains the details of psf2otf function.
+
+This function takes the input filter (kernel) in our case it is [-1, 1] or [-1;
+1] and circularly shifts the kernel while making the size of the input
+kernel same as that of the image. After that we take the FFT
+
+While implementing this function, I got stuck wondering why we shift the
+kernel circularly, it is basically because FFT does cyclic convolution. Below is what I mean by that.
+
+The given kernel is padded with zeros first to match the input image dims,
+then we circularly shift to make the center of kernel to be at (0, 0) as shown in Figure [CycShift]
+
+![Figure [CycShift]: Step-1 Cyclic Shift](/assets/smoothing/images/cyclicshift.png width="1280px")
+
+Figure [Cycconv1] shows the cyclic convolution for non-border pixels
+
+![Figure [Cycconv1]: Cyclic Convolution Non Border
+Case](/assets/smoothing/images/cyclicconv1.png width="600px")
+
+Figure [Cycconv2] shows the cyclic convolution for border pixels
+
+![Figure [Cycconv2]: Cyclic Convolution Border
+Case](/assets/smoothing/images/cyclicconv2.png width="1280px")
+
+Figure [Cycconv2] and Figure [Cycconv1], is showing the cyclic convolution in spatial domain, and FFT(input) .* FFT(cyclic shifted kernel)
+does the same job as (input) convolution with (cyclic shifted kernel)
+
+
+Reference to Cyclic Convolution
+----------------------------------------------------------------------------------------
+In order to read more and verify, refer to following document and the code
+
+Document: [FFT implements cyclic
+convolution](https://www.docdroid.net/YSKkZ5Y/fft-based-2d-cyclic-convolution-pdf#page=5)
+
+Code: [Matlab
+implementation of Cyclic Convolution](https://github.com/RoyiAvital/StackExchangeCodes/blob/master/SignalProcessing/Q38542/Q38542.m)
+
+Python implementation: [psf2otf](https://github.com/nrupatunga/L0-Smoothing/blob/master/src/psf2otf.py)
+
+<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'medium'};</script>
+<!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?" charset="utf-8"></script>
