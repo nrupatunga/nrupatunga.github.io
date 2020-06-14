@@ -4,7 +4,7 @@
 
 **TIP**: Please read the [paper](http://www.cse.cuhk.edu.hk/~leojia/papers/L0smooth_Siggraph_Asia2011.pdf) once and use the following notes to understand the algorithm better
 
-![](../assets/smoothing/images/example.png width="450px")
+![](/assets/smoothing/images/example.png width="450px")
 
 # Overview
 
@@ -27,7 +27,7 @@ the weaker ones but global structural information of the image is preserved.
 Figure [algo] should give you an pictorial idea of what the algorithm does.
 
 ![Figure [algo]: Single row of image data and (red) result of
-gradient minimization](../assets/smoothing/images/algo.jpg width="400px")
+gradient minimization](/assets/smoothing/images/algo.jpg width="400px")
 
 # Algorithm
 
@@ -216,17 +216,17 @@ kernel circularly, it is basically because FFT does cyclic convolution. Below is
 The given kernel is padded with zeros first to match the input image dims,
 then we circularly shift to make the center of kernel to be at (0, 0) as shown in Figure [CycShift]
 
-![Figure [CycShift]: Step-1 Cyclic Shift](../assets/smoothing/images/cyclicshift.png width="1280px")
+![Figure [CycShift]: Step-1 Cyclic Shift](/assets/smoothing/images/cyclicshift.png width="1280px")
 
 Figure [Cycconv1] shows the cyclic convolution for non-border pixels
 
 ![Figure [Cycconv1]: Cyclic Convolution Non Border
-Case](../assets/smoothing/images/cyclicconv1.png width="600px")
+Case](/assets/smoothing/images/cyclicconv1.png width="600px")
 
 Figure [Cycconv2] shows the cyclic convolution for border pixels
 
 ![Figure [Cycconv2]: Cyclic Convolution Border
-Case](../assets/smoothing/images/cyclicconv2.png width="1280px")
+Case](/assets/smoothing/images/cyclicconv2.png width="1280px")
 
 Figure [Cycconv2] and Figure [Cycconv1], is showing the cyclic convolution in spatial domain, and FFT(input) .* FFT(cyclic shifted kernel)
 does the same job as (input) convolution with (cyclic shifted kernel)
