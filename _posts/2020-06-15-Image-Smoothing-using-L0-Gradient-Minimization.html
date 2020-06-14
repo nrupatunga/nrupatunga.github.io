@@ -1,8 +1,11 @@
      <meta charset="utf-8" lang="en"><style class="fallback">body{visibility:hidden;}</style>
 
 			  **Image Smoothing using L<sub>0</sub> Gradient Minimization**
+                                   Nrupatunga
 
 **TIP**: Please read the [paper](http://www.cse.cuhk.edu.hk/~leojia/papers/L0smooth_Siggraph_Asia2011.pdf) once and use the following notes to understand the algorithm better
+
+Python Implementation: [code](https://github.com/nrupatunga/L0-Smoothing)
 
 ![](/assets/smoothing/images/example.png width="450px")
 
@@ -34,7 +37,7 @@ gradient minimization](/assets/smoothing/images/algo.jpg width="400px")
 I will try to introduce some of the basic concepts needed to understand the algorithm.
 Math here is not hard, stick around it will get clear.
 
-**L<sub>0</sub> norm of gradient**
+L<sub>0</sub> norm of gradient
 ---
 Number of pixels with non-zero gradient. Its simple, take an image, take its
 gradient, count the number of pixels with non-zero gradient values.
@@ -45,7 +48,7 @@ $|f_{p}-f_{p+1}|$ - gradient at pixel $p$
 
 $#$ - it is the notation for the count
 
-**1D-Smoothing formulation**
+1D-Smoothing formulation
 ---
 
 So now that we know what L<sub>0</sub> norm of the gradient means, we define
@@ -64,7 +67,7 @@ $(f_{p}-g_{p})^{2}$ - constraint to preserve the global structure of the
 image, while we try to smoothen the image by reducing the number of edges in
 the image with the constrain $c(f)=k$
 
-**2D-Smoothing formulation**
+2D-Smoothing formulation
 ---
 
 Similar to 1D-smoothing we define object function for 2D image smoothing.
@@ -81,7 +84,7 @@ $$\min _{S}\left\{\sum_{p}\left(S_{p}-I_{p}\right)^{2}+\lambda \cdot C(S)\right\
 The term $\sum(S-I)^{2}$ constrains image structural similarity and $\lambda$
 is parameter that control the smoothing.
 
-**Summary**
+Summary
 ---
 
 In summary, the objective function minimizes the number of non-zero gradients in
