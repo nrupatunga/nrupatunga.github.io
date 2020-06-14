@@ -1,5 +1,6 @@
 name: Nrupatunga
 url: http://nrupatunga.github.io
+baseurl: https://github.com/nrupatunga/nrupatunga.github.io
 destination: ./_site
 twitter: nrupatunga1987
 lsi: false
