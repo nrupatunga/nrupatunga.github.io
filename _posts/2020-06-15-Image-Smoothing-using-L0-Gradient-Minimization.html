@@ -92,8 +92,7 @@ Summary
 
 In summary, the objective function minimizes the number of non-zero gradients in
 the image, while trying to preserve the overall structural information of the
-image. So now we need to see how to solve this equation that could lead us to
-the equation that we could implement using Python.
+image.
 
 We need to find a solver for the objective function in equation below:
 
@@ -110,10 +109,11 @@ Eq. [2d] involves two terms:
 Since the second term is not differentiable, we cannot solve this equation using 
 conventional gradient descent optimization method.
 
-The paper talks about something called **Half-quadratic splitting**. Don't be
-intimidated by the name. Basically what they are trying to do is to separate
-the two terms by introducing extra variables in the objective function and
-try to optimize for them individually.
+The paper talks about something called **Half-quadratic splitting** to
+address this optimization problem. Don't be intimidated by the name.
+Basically what they are trying to do is to separate the two terms by
+introducing extra variables in the objective function and try to optimize for
+them individually.
 
 **Modified Objective Function**
 
@@ -127,7 +127,7 @@ S_{p}-v_{p}\right)^{2}\right)\right\}\end{equation}
 where $C(h, v)=\#\left\{p|| h_{p}|+| v_{p} | \neq 0\right\}$ and $\beta$ is a
 parameter to control the similarity between variables $(h, v)$ and their
 corresponding gradient. (h, v) are the horizontal and vertical gradients of
-Smoothened image $S$.
+smoothened image $S$.
 
 The first question that came to my mind is that how do we know $(h, v)$,
 while we are trying to estimate $S$. That's the trick. Here we impose a prior
@@ -172,10 +172,13 @@ Using this $(h, v)$, we estimate $S$, which leads to the final solution below:
 \mathscr{F}\left(\partial_{x}\right)+\mathscr{F}\left(\partial_{y}\right)^{*}
 \mathscr{F}\left(\partial_{y}\right)\right)}\right)\end{equation}
 
+**Note**: You do not need to derive Eq. [solution], you can assume for now,
+solving for $S$ in Eq. [S] leads to this solution. Later on you can dig
+deeper out of interest
+
 # Implementation
 
-Basically we are implementing below equation from the
-[paper](http://www.cse.cuhk.edu.hk/~leojia/papers/L0smooth_Siggraph_Asia2011.pdf):
+Basically we are implementing Eq. [solution]
 
 
 $$S=\mathscr{F}^{-1}\left(\frac{\mathscr{F}(I)+\beta\left(\mathscr{F}\left(\partial_{x}\right)^{*}
@@ -192,25 +195,36 @@ $$\left(h_{p}, v_{p}\right)=\left\{\begin{array}{ll} (0,0) &
 \lambda / \beta \\ \left(\partial_{x} S_{p}, \partial_{y} S_{p}\right) &
 \text { otherwise } \end{array}\right.$$
 
-Brief understanding: 
+Step involved: 
+
 - First from the input image, take the horizontal and vertical gradient of the image.
 
-- Then we have some edges (some with strong gradients, some with medium gradients, some with weak gradients).
+- Then we have some edges (some with strong gradients, some with medium
+gradients, some with weak gradients).
 
-- Now, we threshold some of these gradients to zero them out using the condition $\left(\partial_{x} S_{p}\right)^{2}+\left(\partial_{y} S_{p}\right)^{2} \leq \lambda / \beta$. $\lambda$ and $\beta$ are the hyperparameters.
+- Now, we threshold some of these gradients to zero them out using the
+condition $\left(\partial_{x} S_{p}\right)^{2}+\left(\partial_{y}
+S_{p}\right)^{2} \leq \lambda / \beta$. $\lambda$ and $\beta$ are the
+hyperparameters.
 
-- Intuitively, this means that, we want the output $S$ to have the new set of gradients after applying this condition.
+- Intuitively, this means that, we want the output $S$ to have the new set of
+gradients after applying this condition.
 
-- This is nothing but we are reducing the number of edges in the output image $S$ that are not strong. $h_{p}$ and $v_{p}$ is what we find.
+- This is nothing but we are reducing the number of edges in the output image
+$S$ that are not strong. $h$ and $v$ is what we computed.
 
-Before implementing the algorithm, I went through the theory in Gonzalez Digital Image Processing book, chapter-4.
-This is really a great intro to Fourier Transform properties.
+- Using $h$ and $v$, we now solve $S$
+
+Before implementing the algorithm, I went through the theory in Gonzalez
+Digital Image Processing book, chapter-4. This is really a great intro to
+Fourier Transform properties.
+
+In the next section, I briefly explain about the psf2otf function used in the implementation.
 
 psf2otf
 ----------------------------------------------------------------------------------------
 
 In the Python implementation, you might want to understand the details of psf2otf function.
-This section explains the details of psf2otf function.
 
 This function takes the input filter (kernel) in our case it is [-1, 1] or [-1;
 1] and circularly shifts the kernel while making the size of the input
