@@ -199,19 +199,13 @@ Step involved:
 
 - First from the input image, take the horizontal and vertical gradient of the image.
 
-- Then we have some edges (some with strong gradients, some with medium
-gradients, some with weak gradients).
+- Then we have some edges (some with strong gradients, some with medium gradients, some with weak gradients).
 
-- Now, we threshold some of these gradients to zero them out using the
-condition $\left(\partial_{x} S_{p}\right)^{2}+\left(\partial_{y}
-S_{p}\right)^{2} \leq \lambda / \beta$. $\lambda$ and $\beta$ are the
-hyperparameters.
+- Now, we threshold some of these gradients to zero them out using the condition $\left(\partial_{x} S_{p}\right)^{2}+\left(\partial_{y} S_{p}\right)^{2} \leq \lambda / \beta$. $\lambda$ and $\beta$ are the hyperparameters.
 
-- Intuitively, this means that, we want the output $S$ to have the new set of
-gradients after applying this condition.
+- Intuitively, this means that, we want the output $S$ to have the new set of gradients after applying this condition.
 
-- This is nothing but we are reducing the number of edges in the output image
-$S$ that are not strong. $h$ and $v$ is what we computed.
+- This is nothing but we are reducing the number of edges in the output image $S$ that are not strong. $h$ and $v$ is what we computed.
 
 - Using $h$ and $v$, we now solve $S$
 
