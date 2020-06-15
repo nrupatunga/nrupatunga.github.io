@@ -12,20 +12,22 @@ Python Implementation: [code](https://github.com/nrupatunga/L0-Smoothing)
 # Overview
 
 In this post, I try to introduce the concepts of **Image smoothing using
-L<sub>0</sub> gradient minimization** and describes different parts of its
-implementation in Python
+L<sub>0</sub> gradient minimization** and describes some important parts of
+its implementation in Python
 
 
 # Definition
 
 _**What is L<sub>0</sub> gradient minimization**_?
+It is the minimization of number of non-zero gradients while preserving the
+structural information in the image.
 
-Minimization of number of non-zero gradients while preserving the structural
-information in the image. Reducing the number of non-zero gradients in the
-image results in image smoothing and hence the name.
+Reducing the number of non-zero gradients in the image results in image
+smoothing and hence the name.
 
-In simple terms, we are basically preserving the strong edges and supressing
-the weaker ones but global structural information of the image is preserved.
+In simple terms, we are basically preserving the strong edges, while
+supressing the weaker ones and at the same time preserving the global
+structural information of the image
 
 Figure [algo] should give you an pictorial idea of what the algorithm does.
 
@@ -39,14 +41,15 @@ Math here is not hard, stick around it will get clear.
 
 L<sub>0</sub> norm of gradient
 ---
-Number of pixels with non-zero gradient. Its simple, take an image, take its
-gradient, count the number of pixels with non-zero gradient values.
+It is defined as number of pixels with non-zero gradient. Its simple, take an
+image, take its gradient, count the number of pixels with non-zero gradient
+values.
 
 $$c(f)=\#\left\{p | |f_{p}-f_{p+1}| \neq 0\right\}$$
 
-$|f_{p}-f_{p+1}|$ - gradient at pixel $p$
-
 $#$ - it is the notation for the count
+
+$|f_{p}-f_{p+1}|$ - gradient at pixel $p$
 
 1D-Smoothing formulation
 ---
@@ -70,7 +73,7 @@ the image with the constrain $c(f)=k$
 2D-Smoothing formulation
 ---
 
-Similar to 1D-smoothing we define object function for 2D image smoothing.
+Similar to 1D-smoothing we define objective function for 2D image smoothing.
 
 Let $I$: input image, $S$: smoothened image,
 $\nabla S_{p}=\left(\partial_{x} S_{p}, \partial_{y} S_{p}\right)^{T}$: gradient at pixel $p$
