@@ -97,12 +97,12 @@ the equation that we could implement using Python.
 
 We need to find a solver for the objective function in equation below:
 
-\begin{equation}\min _{S}\left\{\sum_{p}\left(S_{p}-I_{p}\right)^{2}+\lambda
+\begin{equation}\label{2d}\min _{S}\left\{\sum_{p}\left(S_{p}-I_{p}\right)^{2}+\lambda
 \cdot C(S)\right\}\end{equation}
 
 # Solver
 
-Eq (1) involves two terms:
+Eq. [2d] involves two terms:
 
 1. $\sum_{p}\left(S_{p}-I_{p}\right)^{2}$: Quadratic and differentiable
 2. $C(S)$: Non-differentiable
