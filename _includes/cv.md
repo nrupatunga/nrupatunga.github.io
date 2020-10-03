@@ -151,7 +151,7 @@ For more information: <a href="https://nthere.dev/assets/nrupatunga-resume.pdf">
     </tr>
 
     <tr>
-    <td class="col-md-3"><a href='' target='_blank'><img src="images/project_images/flower.png"/></a> </td>
+    <td class="col-md-3"><a href='' target='_blank'><img src="images/project_images/flower.jpg"/></a> </td>
     <td>
     <strong>Image Smoothing via L0 Gradient Minimization</strong><br>
     [<a href='https://github.com/nrupatunga/L0-Smoothing' target='_blank'>code(python)</a>]<br>
