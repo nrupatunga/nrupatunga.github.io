@@ -150,6 +150,13 @@ For more information: <a href="https://nthere.dev/assets/nrupatunga-resume.pdf">
     </td>
     </tr>
 
+    <tr>
+    <td class="col-md-3"><a href='' target='_blank'><img src="images/project_images/flower.png"/></a> </td>
+    <td>
+    <strong>Image Smoothing via L0 Gradient Minimization</strong><br>
+    [<a href='https://github.com/nrupatunga/L0-Smoothing' target='_blank'>code(python)</a>]<br>
+    </td>
+    </tr>
 
     <!--<tr>-->
     <!--<td class="col-md-3"><a href='' target='_blank'><img src="images/project_images/charnn.jpeg"/></a> </td>-->
@@ -168,7 +175,7 @@ For more information: <a href="https://nthere.dev/assets/nrupatunga-resume.pdf">
     [<a href='https://github.com/nrupatunga/Pedestrain-Detection-using-Histogram-of-Oriented-Gradients' target='_blank'>code</a>] <br>
     </td>
     </tr>
-    
+
     <tr>
     <td class="col-md-3"><a href='' target='_blank'><img src="images/project_images/gist.png"/></a> </td>
     <td>
