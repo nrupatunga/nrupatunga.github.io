@@ -23,11 +23,9 @@ Some of the problem domains I have worked on:
 <!--optimized models to run on mobile devices. -->
 
 <br>
-Previously, I have worked on building machine learning models for
-classification, recognition and segmentation problems. I was also
-involved in design and development of image processing & computer vision
-algorithms with hands on C-level and multi-threaded optimisation of
-image processing modules.
+Previously I was also involved in design and development of image
+processing & computer vision algorithms with hands on C-level and
+multi-threaded optimisation of image processing modules.
 
 <br>
 <br>
