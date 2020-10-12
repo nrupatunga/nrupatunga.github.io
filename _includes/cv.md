@@ -1,34 +1,42 @@
 ## About me
 <table class="table table-hover">
 <td class='col-md-3'>
-I currently work as a Research Engineer at Byju's. I'm involved in the
-development of Vision algorithms/building Machine Learning models for various
-computer vision problems involved in the game
+I currently work as a <b>Research Engineer </b> at <b>Byju's</b>
+
+<br>
+<br>
+The combination of the following is what I do on day to day basis:
+
+<li>developing/finetuning computer vision algorithm</li>
+<li>collecting data/labeling for building neural network models</li>
+<li>building/finetuning neural network models</li>
+<li>reading new papers (currently reading on attention and GNN)</li>
+<li>for coding, I use Python (90%) and C++ (10%)</li>
 
 <!--My research and development is focussed on applying Deep Learning to-->
 <!--object detection and recognition problems while designing small or-->
 <!--optimized models to run on mobile devices. -->
 
+<!--<br>-->
+<!--I also have experience in the design and development of image processing &-->
+<!--computer vision algorithms with hands-on C-level and multi-threaded-->
+<!--optimization of image processing modules.-->
 <br>
-<br>
-I also have experience in the design and development of image processing &
-computer vision algorithms with hands on C-level and multi-threaded
-optimization of image processing modules.
+<b>Domain of interest / I have worked on </b>: Computation Photography, Scene Understanding, Metric Learning
+
+<!--<ul>-->
+<!--<li>Object Detection & Recognition</li>-->
+<!--<li>Object Pose Estimation</li>-->
+<!--<li>Classification</li>-->
+<!--<li>Handwriting OCR</li>-->
+<!--<li>Metric Learning</li>-->
+<!--<li>Image Filters</li>-->
+<!--</ul>-->
 
 <br>
 <br>
-Some of the problem domains I have worked on:
-<ul>
-<li>Object Detection & Recognition</li>
-<li>Object Pose Estimation</li>
-<li>Classification</li>
-<li>Handwriting OCR</li>
-<li>Metric Learning</li>
-<li>Image Filters</li>
-</ul>
 
-<br>
-For more information: <a href="https://nthere.dev/assets/nrupatunga-resume.pdf">CV</a>
+<a href="https://nthere.dev/assets/nrupatunga-resume.pdf">Link to CV</a>
 
 </td>
 </table>
