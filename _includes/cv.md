@@ -36,7 +36,7 @@ The combination of the following is what I do on day to day basis:
 <br>
 <br>
 
-<a href="https://nthere.dev/assets/nrupatunga-resume.pdf">Link to CV</a>
+<a href="https://nthere.in/assets/nrupatunga-resume.pdf">Link to CV</a>
 
 </td>
 </table>
