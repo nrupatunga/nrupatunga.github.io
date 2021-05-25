@@ -10,7 +10,7 @@ The combination of the following is what I do on day to day basis:
 <li>developing/finetuning computer vision algorithm</li>
 <li>collecting data/labeling for building neural network models</li>
 <li>building/finetuning neural network models</li>
-<li>reading new papers (currently reading on attention and GNN)</li>
+<li>reading new papers</li>
 <li>for coding, I use Python (90%) and C++ (10%)</li>
 
 <!--My research and development is focussed on applying Deep Learning to-->
@@ -22,7 +22,6 @@ The combination of the following is what I do on day to day basis:
 <!--computer vision algorithms with hands-on C-level and multi-threaded-->
 <!--optimization of image processing modules.-->
 <br>
-<b>Domain of interest / I have worked on </b>: Computation Photography, Scene Understanding, Metric Learning
 
 <!--<ul>-->
 <!--<li>Object Detection & Recognition</li>-->
